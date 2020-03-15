@@ -1,0 +1,6 @@
+<div>
+  <p>dashboard works!</p>
+  <div *ngIf="user$">
+    Hello, {{(user$ | async).firstName}} {{(user$ | async).lastName}}
+  </div>
+</div>
