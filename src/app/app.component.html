@@ -1,11 +1,11 @@
 
 <!-- Toolbar -->
-<mat-toolbar color="primary">
+<mat-toolbar>
   <mat-toolbar-row class="toolbar-row">
-    <span>train.me</span>
+    <a class="toolbar-title" routerLink="/">train.me</a>
     <span class="example-spacer"></span> 
-    <span>Login</span>
-    <span>Register</span>
+    <a mat-button routerLink="/login">Login</a>
+    <a mat-raised-button color="primary" routerLink="/register">Register</a>
     <!-- <mat-icon class="example-icon" aria-hidden="false" aria-label="Example heart icon">verified_user</mat-icon> -->
   </mat-toolbar-row>
 </mat-toolbar>

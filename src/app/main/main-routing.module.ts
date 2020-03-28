@@ -13,6 +13,19 @@ const routes: Routes = [
     component: MainComponent,
     children: [
       {
+        path: 'exercise',
+        loadChildren: () =>
+          import('./exercises/exercises.module').then(
+            m => m.ExercisesModule
+          ),
+      },
+    ],
+  },
+  {
+    path: '',
+    component: MainComponent,
+    children: [
+      {
         path: 'dashboard',
         loadChildren: () =>
           import('./dashboard/dashboard.module').then(

@@ -39,7 +39,10 @@ p {
 }
 
 .toolbar-row {
-  span{
+  .toolbar-title {
+    text-decoration: none;
+  }
+  a {
     margin-left: 20px;
   }
 }

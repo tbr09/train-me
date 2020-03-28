@@ -9,11 +9,11 @@
         "
       >
         <span *ngIf="loginForm.controls.email.errors.required"
-          >This field is mandatory.</span
-        >
+          >This field is mandatory.
+        </span>
         <span *ngIf="loginForm.controls.email.errors.pattern"
-          >This field is invalid.</span
-        >
+          >This field is invalid.
+        </span>
       </mat-error>
     </mat-form-field>
     <mat-form-field class="form-field" appearance="outline">
@@ -26,10 +26,18 @@
         "
       >
         <span *ngIf="loginForm.controls.password.errors.required"
-          >This field is mandatory.</span
-        >
+          >This field is mandatory.
+        </span>
       </mat-error>
     </mat-form-field>
     <button mat-raised-button color="primary" type="submit">Log In</button>
   </form>
+  <div class="social-logins">
+    <button mat-raised-button type="submit" (click)="signInWithGoogle()">
+      Log In with Google
+    </button>
+    <button mat-raised-button type="submit" (click)="signInWithFB()">
+      Log In with Facebook
+    </button>
+  </div>
 </div>
