@@ -10,8 +10,6 @@ import { dashboardStateName, initialState } from './store/state/dashboard.state'
 import { DashboardEffects } from './store/effects/dashboard.effect';
 import { createDashboardReducer } from './store';
 
-
-
 @NgModule({
   declarations: [DashboardComponent],
   imports: [

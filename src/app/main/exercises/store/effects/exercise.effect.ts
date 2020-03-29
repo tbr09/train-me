@@ -1,18 +1,19 @@
-import { ExerciseClient } from './../../../../services/api/api.service';
 import { Injectable } from "@angular/core";
 import { Actions, ofType, Effect, createEffect } from "@ngrx/effects";
 import { Action } from "@ngrx/store";
+
 import { Observable, of } from "rxjs";
 import { map, catchError, switchMap } from "rxjs/operators";
+
+import { ExerciseClient } from './../../../../services/api/api.service';
 import {
   ExerciseActionTypes,
   LoadExercisesSuccess,
   LoadExercisesFail
 } from "../actions/exercise.action";
-import { UserClient } from "src/app/services/api/api.service";
 
 @Injectable()
-export class DashboardEffects {
+export class ExercisesEffects {
   @Effect() loadExercises$: Observable<Action> = this.actions$.pipe(
     ofType(ExerciseActionTypes.LoadExercises),
     switchMap(() => {

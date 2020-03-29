@@ -19,12 +19,6 @@ const routes: Routes = [
             m => m.ExercisesModule
           ),
       },
-    ],
-  },
-  {
-    path: '',
-    component: MainComponent,
-    children: [
       {
         path: 'dashboard',
         loadChildren: () =>
@@ -33,7 +27,7 @@ const routes: Routes = [
           ),
       },
     ],
-  },
+  }
 ];
   
 @NgModule({

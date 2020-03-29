@@ -1,1 +1,3 @@
-<p>exercises works!</p>
+<mat-list>
+    <a mat-list-item *ngFor="let exercise of exercises$ | async"> {{ exercise.name }} </a>
+</mat-list>
