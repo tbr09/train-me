@@ -31,27 +31,27 @@ export class ExerciseClient implements IExerciseService {
       {
         id: "0",
         name: "Russian Twist",
-        description: "",
-        category: "",
-        bodyPart: "",
+        description: "-",
+        category: "Calinestics",
+        bodyPart: "Shoulders",
         videoLink: "",
         icon: ""
       },
       {
         id: "1",
         name: "Dzień dobry z kettlebell",
-        description: "",
-        category: "",
-        bodyPart: "",
+        description: "-",
+        category: "Strength",
+        bodyPart: "Legs",
         videoLink: "",
         icon: ""
       },
       {
         id: "2",
         name: "Przyciąganie do twarzy na TRX",
-        description: "",
-        category: "",
-        bodyPart: "",
+        description: "-",
+        category: "Durability",
+        bodyPart: "Chest",
         videoLink: "",
         icon: ""
       }

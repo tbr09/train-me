@@ -1,8 +1,15 @@
 .login-form-container {
-  width: 100%;
-  margin: 0 px auto;
-  margin-top: 200 px;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  form {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-width: 25%;
+  }
 
   .social-logins {
     display: flex;

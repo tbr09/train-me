@@ -29,6 +29,6 @@ export const initialState: ExerciseState = {
       icon: ""
     }
   ],
-  isLoading: false,
+  isLoading: true,
   isError: null
 };
