@@ -5,6 +5,12 @@ export enum ExerciseActionTypes {
   LoadExercises = '[Exercise] LoadExercises',
   LoadExercisesSuccess = '[Exercise] LoadExercisesSuccess',
   LoadExercisesFail = '[Exercise] LoadExercisesFail',
+  AddExercise = '[Exercise] AddExercise',
+}
+
+export class AddExercise implements Action {
+  readonly type = ExerciseActionTypes.AddExercise;
+  constructor(public payload: ExerciseModel) {}
 }
 
 export class LoadExercises implements Action {
@@ -25,4 +31,5 @@ export class LoadExercisesFail implements Action {
 export type ExerciseActions =
   | LoadExercises
   | LoadExercisesSuccess
-  | LoadExercisesFail;
+  | LoadExercisesFail
+  | AddExercise;

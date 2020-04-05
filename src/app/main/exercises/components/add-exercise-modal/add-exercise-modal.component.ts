@@ -1,34 +1,40 @@
-import { Component, OnInit } from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-
+import {
+  categories,
+  bodyParts,
+} from "./../../../../constant/exercise.constant";
+import { Component, OnInit } from "@angular/core";
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from "@angular/material/dialog";
+import { FormControl, Validators, FormGroup } from "@angular/forms";
 
 @Component({
-  selector: 'app-add-exercise-modal',
-  templateUrl: './add-exercise-modal.component.html',
-  styleUrls: ['./add-exercise-modal.component.scss']
+  selector: "app-add-exercise-modal",
+  templateUrl: "./add-exercise-modal.component.html",
+  styleUrls: ["./add-exercise-modal.component.scss"],
 })
 export class AddExerciseModalComponent implements OnInit {
+  addExerciseForm = new FormGroup({
+    name: new FormControl("", Validators.required),
+    description: new FormControl(""),
+    category: new FormControl(""),
+    bodyPart: new FormControl(""),
+  });
 
-  animal: string;
-  name: string;
+  categories = categories.map((cat, i) => ({ value: i, viewValue: cat }));
+  bodyParts = bodyParts.map((bp, i) => ({ value: i, viewValue: bp }));
 
-  constructor(public dialog: MatDialog) {}
+  constructor(private dialogRef: MatDialogRef<AddExerciseModalComponent>) {}
 
-  openDialog(): void {
-
-    const dialogRef = this.dialog.open(AddExerciseModalComponent, {
-      width: '250px',
-      data: {name: this.name, animal: this.animal}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.animal = result;
-    });
+  submit() {
+    this.dialogRef.close(this.addExerciseForm);
   }
 
-
-  ngOnInit(): void {
+  close() {
+    this.dialogRef.close();
   }
 
+  ngOnInit(): void {}
 }

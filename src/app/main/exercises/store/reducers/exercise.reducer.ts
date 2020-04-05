@@ -1,12 +1,12 @@
 import {
   ExerciseActionTypes,
-  ExerciseActions
+  ExerciseActions,
 } from "../actions/exercise.action";
 import { initialState, ExerciseState } from "../state/exercise.state";
 import { ActionReducerMap } from "@ngrx/store";
 
 export function createExerciseReducer(
-  state = initialState, 
+  state = initialState,
   action: ExerciseActions
 ): ExerciseState {
   console.log(action);
@@ -16,7 +16,7 @@ export function createExerciseReducer(
       return {
         ...state,
         isLoading: true,
-        isError: null
+        isError: null,
       };
     }
     case ExerciseActionTypes.LoadExercisesSuccess: {
@@ -24,14 +24,21 @@ export function createExerciseReducer(
         ...state,
         exercises: action.payload,
         isLoading: false,
-        isError: null
+        isError: null,
       };
     }
     case ExerciseActionTypes.LoadExercisesFail: {
       return {
         ...state,
         isLoading: false,
-        isError: true
+        isError: true,
+      };
+    }
+    case ExerciseActionTypes.AddExercise: {
+      return {
+        exercises: [...state.exercises, action.payload],
+        isLoading: false,
+        isError: true,
       };
     }
     default:

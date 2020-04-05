@@ -32,8 +32,8 @@ export class ExerciseClient implements IExerciseService {
         id: "0",
         name: "Russian Twist",
         description: "-",
-        category: "Calinestics",
-        bodyPart: "Shoulders",
+        category: 0,
+        bodyPart: 3,
         videoLink: "",
         icon: ""
       },
@@ -41,8 +41,8 @@ export class ExerciseClient implements IExerciseService {
         id: "1",
         name: "Dzień dobry z kettlebell",
         description: "-",
-        category: "Strength",
-        bodyPart: "Legs",
+        category: 1,
+        bodyPart: 2,
         videoLink: "",
         icon: ""
       },
@@ -50,8 +50,8 @@ export class ExerciseClient implements IExerciseService {
         id: "2",
         name: "Przyciąganie do twarzy na TRX",
         description: "-",
-        category: "Durability",
-        bodyPart: "Chest",
+        category: 3,
+        bodyPart: 1,
         videoLink: "",
         icon: ""
       }

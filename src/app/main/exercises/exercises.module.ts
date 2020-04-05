@@ -1,3 +1,4 @@
+import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from "@angular/material/button";
 import { EffectsModule } from "@ngrx/effects";
 import { StoreModule } from "@ngrx/store";
@@ -15,21 +16,35 @@ import { MatTableModule } from "@angular/material/table";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatIconModule } from "@angular/material/icon";
 import { MatDialogModule } from "@angular/material/dialog";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { AddExerciseModalTemplateFormComponent } from "./components/add-exercise-modal-template-form/add-exercise-modal-template-form/add-exercise-modal-template-form.component";
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
-  declarations: [ExercisesComponent, AddExerciseModalComponent],
+  declarations: [
+    ExercisesComponent,
+    AddExerciseModalComponent,
+    AddExerciseModalTemplateFormComponent,
+  ],
   imports: [
     CommonModule,
     ExercisesRoutingModule,
     StoreModule.forFeature(exerciseStateName, createExerciseReducer, {
-      initialState
+      initialState,
     }),
     EffectsModule.forFeature([ExercisesEffects]),
+    FormsModule,
+    ReactiveFormsModule,
     MatTableModule,
     MatButtonModule,
     MatIconModule,
+    MatInputModule,
+    MatFormFieldModule,
     MatDialogModule,
-    MatProgressSpinnerModule
-  ]
+    MatSelectModule,
+    MatProgressSpinnerModule,
+  ],
+  entryComponents: [ AddExerciseModalComponent ],
 })
 export class ExercisesModule {}

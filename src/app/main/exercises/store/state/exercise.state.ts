@@ -14,8 +14,8 @@ export const initialState: ExerciseState = {
       id: "0",
       name: "Russian Twist",
       description: "",
-      category: "",
-      bodyPart: "",
+      category: 1,
+      bodyPart: 2,
       videoLink: "",
       icon: ""
     },
@@ -23,8 +23,8 @@ export const initialState: ExerciseState = {
       id: "1",
       name: "Dzień dobry z kettlebell",
       description: "",
-      category: "",
-      bodyPart: "",
+      category: 0,
+      bodyPart: 1,
       videoLink: "",
       icon: ""
     }
