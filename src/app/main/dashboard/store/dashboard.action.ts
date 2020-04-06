@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { BasicUserProfileModel } from '../../models/userprofile.model';
+import { BasicUserProfileModel } from '../models/userprofile.model';
 
 export enum DashboardActionTypes {
   LoadUser = '[UserProfile] LoadUser',

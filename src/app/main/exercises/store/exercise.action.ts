@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { ExerciseModel } from '../../models/exercise.model';
+import { ExerciseModel } from '../models/exercise.model';
 
 export enum ExerciseActionTypes {
   LoadExercises = '[Exercise] LoadExercises',

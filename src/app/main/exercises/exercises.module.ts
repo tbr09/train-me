@@ -6,8 +6,8 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
 import { ExercisesRoutingModule } from "./exercises-routing.module";
-import { ExercisesEffects } from "./store/effects/exercise.effect";
-import { exerciseStateName, initialState } from "./store/state/exercise.state";
+import { ExercisesEffects } from "./store/exercise.effect";
+import { exerciseStateName, initialState } from "./store/exercise.state";
 import { ExercisesComponent } from "./exercises.component";
 import { createExerciseReducer } from "./store";
 import { AddExerciseModalComponent } from "./components/add-exercise-modal/add-exercise-modal.component";

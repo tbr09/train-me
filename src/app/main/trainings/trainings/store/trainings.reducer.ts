@@ -1,42 +1,42 @@
 import {
-  ExerciseActionTypes,
-  ExerciseActions,
-} from "../actions/exercise.action";
-import { initialState, ExerciseState } from "../state/exercise.state";
+  TrainingActionTypes,
+  TrainingActions,
+} from "./trainings.action";
+import { initialState, TrainingState } from "./trainings.state";
 import { ActionReducerMap } from "@ngrx/store";
 
-export function createExerciseReducer(
+export function createTrainingReducer(
   state = initialState,
-  action: ExerciseActions
-): ExerciseState {
+  action: TrainingActions
+): TrainingState {
   console.log(action);
 
   switch (action.type) {
-    case ExerciseActionTypes.LoadExercises: {
+    case TrainingActionTypes.LoadTrainings: {
       return {
         ...state,
         isLoading: true,
         isError: null,
       };
     }
-    case ExerciseActionTypes.LoadExercisesSuccess: {
+    case TrainingActionTypes.LoadTrainingsSuccess: {
       return {
         ...state,
-        exercises: action.payload,
+        trainings: action.payload,
         isLoading: false,
         isError: null,
       };
     }
-    case ExerciseActionTypes.LoadExercisesFail: {
+    case TrainingActionTypes.LoadTrainingsFail: {
       return {
         ...state,
         isLoading: false,
         isError: true,
       };
     }
-    case ExerciseActionTypes.AddExercise: {
+    case TrainingActionTypes.AddTraining: {
       return {
-        exercises: [...state.exercises, action.payload],
+        trainings: [...state.trainings, action.payload],
         isLoading: false,
         isError: true,
       };

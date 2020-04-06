@@ -1,11 +1,11 @@
-import { BasicUserProfileModel } from '../../models/userprofile.model';
+import { BasicUserProfileModel } from '../models/userprofile.model';
 import {
     createFeatureSelector,
     createSelector,
     MemoizedSelector,
   } from '@ngrx/store';
   
-  import { DashboardState, dashboardStateName } from '../state/dashboard.state';
+  import { DashboardState, dashboardStateName } from './dashboard.state';
 
   export const getFeatureState: MemoizedSelector<
     object,

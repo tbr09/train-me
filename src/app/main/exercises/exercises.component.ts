@@ -1,11 +1,11 @@
 import { categories, bodyParts } from './../../constant/exercise.constant';
 import { AddExerciseModalComponent } from "./components/add-exercise-modal/add-exercise-modal.component";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
-import { ExerciseActionTypes } from "./store/actions/exercise.action";
+import { ExerciseActionTypes } from "./store/exercise.action";
 import {
   getExercises,
   getIsLoading,
-} from "./store/selectors/exercise.selectors";
+} from "./store/exercise.selectors";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { Component, OnInit } from "@angular/core";

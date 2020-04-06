@@ -7,7 +7,7 @@ import {
   DashboardActionTypes,
   LoadUserSuccess,
   LoadUserFail
-} from "../actions/dashboard.action";
+} from "./dashboard.action";
 import { UserClient } from "src/app/services/api/api.service";
 
 @Injectable()

@@ -1,4 +1,4 @@
-import { BasicUserProfileModel } from "../../models/userprofile.model";
+import { BasicUserProfileModel } from "../models/userprofile.model";
 
 export const dashboardStateName = "dashboardStateName";
 

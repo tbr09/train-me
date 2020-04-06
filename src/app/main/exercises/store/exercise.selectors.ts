@@ -1,11 +1,11 @@
-import { ExerciseModel } from "./../../models/exercise.model";
+import { ExerciseModel } from "../models/exercise.model";
 import {
   createFeatureSelector,
   createSelector,
   MemoizedSelector
 } from "@ngrx/store";
 
-import { ExerciseState, exerciseStateName } from "../state/exercise.state";
+import { ExerciseState, exerciseStateName } from "./exercise.state";
 
 export const getFeatureState: MemoizedSelector<
   object,

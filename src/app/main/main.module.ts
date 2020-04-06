@@ -1,3 +1,4 @@
+import { TrainingsModule } from './trainings/trainings/trainings.module';
 import { MainRoutingModule } from './main-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
@@ -13,6 +14,7 @@ import { MainComponent } from './main.component';
   imports: [
     CommonModule,
     DashboardModule,
+    TrainingsModule,
     FormsModule,
     ReactiveFormsModule,
     MainRoutingModule

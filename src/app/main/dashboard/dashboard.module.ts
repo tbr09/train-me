@@ -6,8 +6,8 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
 import { DashboardComponent } from './dashboard.component';
-import { dashboardStateName, initialState } from './store/state/dashboard.state';
-import { DashboardEffects } from './store/effects/dashboard.effect';
+import { dashboardStateName, initialState } from './store/dashboard.state';
+import { DashboardEffects } from './store/dashboard.effect';
 import { createDashboardReducer } from './store';
 
 @NgModule({

@@ -1,4 +1,4 @@
-import { DashboardActionTypes } from './store/actions/dashboard.action';
+import { DashboardActionTypes } from './store/dashboard.action';
 import { BasicUserProfileModel } from "./models/userprofile.model";
 import { Observable, Subscription } from "rxjs";
 import { Component, OnInit } from "@angular/core";

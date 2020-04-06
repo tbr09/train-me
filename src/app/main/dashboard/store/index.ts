@@ -1,6 +1,6 @@
-import * as DashboardActions from './actions/dashboard.action';
-export * from './reducers/dashboard.reducer';
-export * from './selectors/dashboard.selectors';
-export * from './effects/dashboard.effect';
-export * from './state/dashboard.state';
+import * as DashboardActions from './dashboard.action';
+export * from './dashboard.reducer';
+export * from './dashboard.selectors';
+export * from './dashboard.effect';
+export * from './dashboard.state';
 export { DashboardActions };

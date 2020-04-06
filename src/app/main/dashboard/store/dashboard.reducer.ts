@@ -1,8 +1,8 @@
 import {
   DashboardActionTypes,
   DashboardActions
-} from "../actions/dashboard.action";
-import { initialState, DashboardState } from "../state/dashboard.state";
+} from "./dashboard.action";
+import { initialState, DashboardState } from "./dashboard.state";
 import { ActionReducerMap } from "@ngrx/store";
 
 export function createDashboardReducer(

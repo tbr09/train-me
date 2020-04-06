@@ -5,12 +5,12 @@ import { Action } from "@ngrx/store";
 import { Observable, of } from "rxjs";
 import { map, catchError, switchMap } from "rxjs/operators";
 
-import { ExerciseClient } from './../../../../services/api/api.service';
+import { ExerciseClient } from '../../../services/api/api.service';
 import {
   ExerciseActionTypes,
   LoadExercisesSuccess,
   LoadExercisesFail
-} from "../actions/exercise.action";
+} from "./exercise.action";
 
 @Injectable()
 export class ExercisesEffects {
