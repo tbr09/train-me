@@ -16,6 +16,7 @@ export const initialState: ExerciseState = {
       description: "",
       category: 1,
       bodyPart: 2,
+      difficulty: 1,
       videoLink: "",
       icon: ""
     },
@@ -25,6 +26,7 @@ export const initialState: ExerciseState = {
       description: "",
       category: 0,
       bodyPart: 1,
+      difficulty: 0,
       videoLink: "",
       icon: ""
     }

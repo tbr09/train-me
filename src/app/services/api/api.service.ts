@@ -1,4 +1,5 @@
-import { TrainingModel } from "src/app/main/trainings/trainings/models/training.model";
+import { TrainingExerciseModel } from "../../main/trainings/models/training-exercise.model";
+import { TrainingModel } from "../../main/trainings/models/training.model";
 import { LoginData } from "./../../login/models/logindata.model";
 import { Observable, defer } from "rxjs";
 import { BasicUserProfileModel } from "src/app/main/dashboard/models/userprofile.model";
@@ -17,15 +18,33 @@ export class TrainingClient implements ITrainingService {
         id: "1",
         name: "Trening 1",
         description: "Opis treningu 1",
-        exercisesIds: [1,3,2]
-      },
+        exercises: [
+          {
+            repetitions: [12, 10, 8],
+            exerciseId: 1,
+            exerciseTitle: "Cwiczenie 1",
+            category: 1,
+            bodyPart: 2,
+            difficulty: 1,
+          } as TrainingExerciseModel,
+        ],
+      } as TrainingModel,
       {
         id: "2",
         name: "Trening 2",
-        description: "Opis treningu 2",
-        exercisesIds: [2,3,0]
-      },
+        exercises: [
+          {
+            repetitions: [12, 10, 8],
+            exerciseId: 1,
+            exerciseTitle: "Cwiczenie 1",
+            category: 1,
+            bodyPart: 2,
+            difficulty: 1,
+          } as TrainingExerciseModel,
+        ],
+      } as TrainingModel,
     ];
+
     return defer(() => Promise.resolve(returnValue));
   }
 }
@@ -60,6 +79,7 @@ export class ExerciseClient implements IExerciseService {
         description: "-",
         category: 0,
         bodyPart: 3,
+        difficulty: 1,
         videoLink: "",
         icon: "",
       },
@@ -69,6 +89,7 @@ export class ExerciseClient implements IExerciseService {
         description: "-",
         category: 1,
         bodyPart: 2,
+        difficulty: 2,
         videoLink: "",
         icon: "",
       },
@@ -79,6 +100,7 @@ export class ExerciseClient implements IExerciseService {
         category: 3,
         bodyPart: 1,
         videoLink: "",
+        difficulty: 4,
         icon: "",
       },
     ];

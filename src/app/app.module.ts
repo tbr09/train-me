@@ -10,7 +10,7 @@ import { MatSidenavModule } from "@angular/material/sidenav";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { UserClient, ExerciseClient } from "./services/api/api.service";
+import { UserClient, ExerciseClient, TrainingClient } from "./services/api/api.service";
 import { MainModule } from "./main/main.module";
 
 import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
@@ -56,7 +56,8 @@ export function provideConfig() {
       provide: AuthServiceConfig,
       useFactory: provideConfig
     },
-    ExerciseClient
+    ExerciseClient,
+    TrainingClient
   ],
   bootstrap: [AppComponent]
 })

@@ -5,7 +5,7 @@ import { Action } from "@ngrx/store";
 import { Observable, of } from "rxjs";
 import { map, catchError, switchMap } from "rxjs/operators";
 
-import { TrainingClient } from '../../../../services/api/api.service';
+import { TrainingClient } from '../../../services/api/api.service';
 
 import {
   TrainingActionTypes,

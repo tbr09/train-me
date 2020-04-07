@@ -1,6 +1,5 @@
-
-<div class="spinner-container" >
-  <mat-spinner *ngIf="(isLoading$ | async)"></mat-spinner>
+<div class="spinner-container">
+  <mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
 </div>
 <div class="exercise-table-wrapper">
   <div class="exercise-actions">
@@ -8,6 +7,8 @@
       <mat-icon>add</mat-icon> Add new exercise
     </button>
   </div>
+
+  <div class="exercise-filters"></div>
 
   <table
     mat-table
@@ -34,12 +35,16 @@
 
     <ng-container matColumnDef="category">
       <th mat-header-cell *matHeaderCellDef>Category</th>
-      <td mat-cell *matCellDef="let element">{{ categories[element.category] }}</td>
+      <td mat-cell *matCellDef="let element">
+        {{ categories[element.category] }}
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="bodyPart">
       <th mat-header-cell *matHeaderCellDef>Body Part</th>
-      <td mat-cell *matCellDef="let element">{{ bodyParts[element.bodyPart] }}</td>
+      <td mat-cell *matCellDef="let element">
+        {{ bodyParts[element.bodyPart] }}
+      </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -1,3 +1,4 @@
+import { TrainingsModule } from './trainings/trainings.module';
 import { MainComponent } from './main.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -17,6 +18,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('./exercises/exercises.module').then(
             m => m.ExercisesModule
+          ),
+      },
+      {
+        path: 'training',
+        loadChildren: () =>
+          import('./trainings/trainings.module').then(
+            m => m.TrainingsModule
           ),
       },
       {
