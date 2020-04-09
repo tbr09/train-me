@@ -9,9 +9,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TrainingsComponent } from './trainings.component';
 import { createTrainingReducer } from './store';
+import { TrainingDetailsComponent } from './components/training-details/training-details.component';
 
 @NgModule({
-  declarations: [TrainingsComponent],
+  declarations: [TrainingsComponent, TrainingDetailsComponent],
   imports: [
     CommonModule,
     TrainingsRoutingModule,

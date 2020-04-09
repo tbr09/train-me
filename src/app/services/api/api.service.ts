@@ -8,44 +8,17 @@ import { ExerciseModel } from "src/app/main/exercises/models/exercise.model";
 
 export interface ITrainingService {
   getTrainings(): Observable<TrainingModel[]>;
+  getTraining(id: number): Observable<TrainingModel>
 }
 
 @Injectable()
 export class TrainingClient implements ITrainingService {
   getTrainings(): Observable<TrainingModel[]> {
-    const returnValue = [
-      {
-        id: "1",
-        name: "Trening 1",
-        description: "Opis treningu 1",
-        exercises: [
-          {
-            repetitions: [12, 10, 8],
-            exerciseId: 1,
-            exerciseTitle: "Cwiczenie 1",
-            category: 1,
-            bodyPart: 2,
-            difficulty: 1,
-          } as TrainingExerciseModel,
-        ],
-      } as TrainingModel,
-      {
-        id: "2",
-        name: "Trening 2",
-        exercises: [
-          {
-            repetitions: [12, 10, 8],
-            exerciseId: 1,
-            exerciseTitle: "Cwiczenie 1",
-            category: 1,
-            bodyPart: 2,
-            difficulty: 1,
-          } as TrainingExerciseModel,
-        ],
-      } as TrainingModel,
-    ];
+    return defer(() => Promise.resolve(trainings));
+  }
 
-    return defer(() => Promise.resolve(returnValue));
+  getTraining(id: number): Observable<TrainingModel>{
+    return defer(() => Promise.resolve(trainings[id]))
   }
 }
 
@@ -118,3 +91,35 @@ export class AuthClient implements IAuthService {
     return defer(() => Promise.resolve("token"));
   }
 }
+
+const trainings = [
+  {
+    id: "1",
+    name: "Trening 1",
+    description: "Opis treningu 1",
+    exercises: [
+      {
+        repetitions: [12, 10, 8],
+        exerciseId: 1,
+        exerciseTitle: "Cwiczenie 1",
+        category: 1,
+        bodyPart: 2,
+        difficulty: 1,
+      } as TrainingExerciseModel,
+    ],
+  } as TrainingModel,
+  {
+    id: "2",
+    name: "Trening 2",
+    exercises: [
+      {
+        repetitions: [12, 10, 8],
+        exerciseId: 1,
+        exerciseTitle: "Cwiczenie 1",
+        category: 1,
+        bodyPart: 2,
+        difficulty: 1,
+      } as TrainingExerciseModel,
+    ],
+  } as TrainingModel,
+];
