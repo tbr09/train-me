@@ -1,4 +1,4 @@
-import { MatInputModule } from '@angular/material/input';
+import { MatInputModule } from "@angular/material/input";
 import { MatButtonModule } from "@angular/material/button";
 import { EffectsModule } from "@ngrx/effects";
 import { StoreModule } from "@ngrx/store";
@@ -19,7 +19,8 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { AddExerciseModalTemplateFormComponent } from "./components/add-exercise-modal-template-form/add-exercise-modal-template-form/add-exercise-modal-template-form.component";
-import { MatSelectModule } from '@angular/material/select';
+import { MatSelectModule } from "@angular/material/select";
+import { MatSortModule } from "@angular/material/sort";
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { MatSelectModule } from '@angular/material/select';
     EffectsModule.forFeature([ExercisesEffects]),
     FormsModule,
     ReactiveFormsModule,
+    MatSortModule,
     MatTableModule,
     MatButtonModule,
     MatIconModule,
@@ -45,6 +47,6 @@ import { MatSelectModule } from '@angular/material/select';
     MatSelectModule,
     MatProgressSpinnerModule,
   ],
-  entryComponents: [ AddExerciseModalComponent ],
+  entryComponents: [AddExerciseModalComponent],
 })
 export class ExercisesModule {}
