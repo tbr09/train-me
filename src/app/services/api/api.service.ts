@@ -87,7 +87,7 @@ export class ExerciseClient implements IExerciseService {
   }
 
   getExercisesByTerm(name: string): Observable<ExerciseModel[]> {
-    return this.http.get<ExerciseModel[]>(`apiUrl/exercise/${name}`);
+    return this.http.get<ExerciseModel[]>(`${apiUrl}/exercise/search/${name}`);
   }
 }
 
