@@ -1,6 +1,6 @@
 
 export interface ExerciseModel {
-    id: string;
+    id: number;
     name: string;
     description: string;
     category: number;

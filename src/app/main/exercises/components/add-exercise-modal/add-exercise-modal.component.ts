@@ -4,9 +4,7 @@ import {
 } from "./../../../../constant/exercise.constant";
 import { Component, OnInit } from "@angular/core";
 import {
-  MatDialog,
   MatDialogRef,
-  MAT_DIALOG_DATA,
 } from "@angular/material/dialog";
 import { FormControl, Validators, FormGroup } from "@angular/forms";
 

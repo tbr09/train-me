@@ -5,7 +5,7 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/main/dashboard',
+    redirectTo: '/dashboard',
     pathMatch: 'full',
   },
   {

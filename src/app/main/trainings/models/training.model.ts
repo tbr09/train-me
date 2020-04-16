@@ -1,7 +1,7 @@
 import { TrainingExerciseModel } from './training-exercise.model';
 
 export interface TrainingModel {
-    id: string;
+    id: number;
     name: string;
     description: string;
     exercises: TrainingExerciseModel[];

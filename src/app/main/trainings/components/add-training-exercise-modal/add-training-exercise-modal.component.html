@@ -1,0 +1,46 @@
+<!-- Reactive forms-->
+
+<h2 mat-dialog-title>Add exercise to training</h2>
+
+<mat-dialog-content [formGroup]="addTrainingExerciseForm">
+  <div mat-dialog-content>
+    <mat-form-field class="example-full-width">
+      <input
+        matInput
+        placeholder="State"
+        aria-label="State"
+        [matAutocomplete]="auto"
+        formControlName="stateCtrl"
+      />
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option
+          *ngFor="let exercise of filteredExercises$ | async"
+          [value]="exercise.id"
+        >
+          <!-- <img
+            class="example-option-img"
+            aria-hidden
+            [src]="exercise.flag"
+            height="25"
+          /> -->
+          <span>{{ exercise.name }}</span> |
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    
+  </div>
+
+  <p
+    style="color: red;"
+    [hidden]="addTrainingExerciseForm.valid || !addTrainingExerciseForm.touched"
+  >
+    Form not completed!
+  </p>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button class="mat-raised-button mat-primary" (click)="submit()">
+    Submit
+  </button>
+  <button class="mat-raised-button" (click)="close()">Close</button>
+</mat-dialog-actions>

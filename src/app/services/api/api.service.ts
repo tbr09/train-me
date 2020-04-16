@@ -5,10 +5,13 @@ import { Observable, defer } from "rxjs";
 import { BasicUserProfileModel } from "src/app/main/dashboard/models/userprofile.model";
 import { Injectable } from "@angular/core";
 import { ExerciseModel } from "src/app/main/exercises/models/exercise.model";
+import { HttpClient } from '@angular/common/http';
+
+const apiUrl = "https://localhost:44389";
 
 export interface ITrainingService {
   getTrainings(): Observable<TrainingModel[]>;
-  getTraining(id: number): Observable<TrainingModel>
+  getTraining(id: number): Observable<TrainingModel>;
 }
 
 @Injectable()
@@ -17,8 +20,8 @@ export class TrainingClient implements ITrainingService {
     return defer(() => Promise.resolve(trainings));
   }
 
-  getTraining(id: number): Observable<TrainingModel>{
-    return defer(() => Promise.resolve(trainings[id]))
+  getTraining(id: number): Observable<TrainingModel> {
+    return defer(() => Promise.resolve(trainings.find((t) => t.id == id)));
   }
 }
 
@@ -40,14 +43,17 @@ export class UserClient implements IUserService {
 
 export interface IExerciseService {
   getExercises(): Observable<ExerciseModel[]>;
+  getExercisesByTerm(name: string): Observable<ExerciseModel[]>;
 }
 
 @Injectable()
 export class ExerciseClient implements IExerciseService {
+  constructor(private http: HttpClient) {}
+
   getExercises(): Observable<ExerciseModel[]> {
     const returnValue = [
       {
-        id: "0",
+        id: 1,
         name: "Russian Twist",
         description: "-",
         category: 0,
@@ -57,7 +63,7 @@ export class ExerciseClient implements IExerciseService {
         icon: "",
       },
       {
-        id: "1",
+        id: 2,
         name: "Dzień dobry z kettlebell",
         description: "-",
         category: 1,
@@ -67,7 +73,7 @@ export class ExerciseClient implements IExerciseService {
         icon: "",
       },
       {
-        id: "2",
+        id: 3,
         name: "Przyciąganie do twarzy na TRX",
         description: "-",
         category: 3,
@@ -78,6 +84,10 @@ export class ExerciseClient implements IExerciseService {
       },
     ];
     return defer(() => Promise.resolve(returnValue));
+  }
+
+  getExercisesByTerm(name: string): Observable<ExerciseModel[]> {
+    return this.http.get<ExerciseModel[]>(`apiUrl/exercise/${name}`);
   }
 }
 
@@ -94,7 +104,7 @@ export class AuthClient implements IAuthService {
 
 const trainings = [
   {
-    id: "1",
+    id: 1,
     name: "Trening 1",
     description: "Opis treningu 1",
     exercises: [
@@ -109,11 +119,19 @@ const trainings = [
     ],
   } as TrainingModel,
   {
-    id: "2",
+    id: 2,
     name: "Trening 2",
     exercises: [
       {
         repetitions: [12, 10, 8],
+        exerciseId: 1,
+        exerciseTitle: "Cwiczenie 1",
+        category: 1,
+        bodyPart: 2,
+        difficulty: 1,
+      } as TrainingExerciseModel,
+      {
+        repetitions: [6, 6, 4],
         exerciseId: 1,
         exerciseTitle: "Cwiczenie 1",
         category: 1,

@@ -32,8 +32,14 @@ p {
 .toolbar-row {
   .toolbar-title {
     text-decoration: none;
+    margin-right: 40px;
   }
   a {
     margin-left: 20px;
+  }
+
+  .toolbar-element {
+    font-size: 14px;
+    text-decoration: none;
   }
 }

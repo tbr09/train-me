@@ -11,7 +11,7 @@ export interface ExerciseState {
 export const initialState: ExerciseState = {
   exercises: [
     {
-      id: "0",
+      id: 0,
       name: "Russian Twist",
       description: "",
       category: 1,
@@ -21,7 +21,7 @@ export const initialState: ExerciseState = {
       icon: ""
     },
     {
-      id: "1",
+      id: 1,
       name: "Dzień dobry z kettlebell",
       description: "",
       category: 0,

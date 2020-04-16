@@ -12,7 +12,7 @@ export interface TrainingState {
 export const initialState: TrainingState = {
   trainings: [
     {
-      id: "1",
+      id: 1,
       name: "Trening 1",
       description: "Opis treningu 1",
       exercises: [
