@@ -7,15 +7,15 @@
     <mat-form-field class="example-full-width">
       <input
         matInput
-        placeholder="State"
-        aria-label="State"
+        placeholder="Exercise"
+        aria-label="exercise"
         [matAutocomplete]="auto"
-        formControlName="stateCtrl"
+        formControlName="exercise"
       />
-      <mat-autocomplete #auto="matAutocomplete">
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="getExerciseName">
         <mat-option
           *ngFor="let exercise of filteredExercises$ | async"
-          [value]="exercise.name"
+          [value]="exercise"
         >
           <span>{{ exercise.name }}</span>
         </mat-option>
@@ -28,7 +28,7 @@
     style="color: red;"
     [hidden]="addTrainingExerciseForm.valid || !addTrainingExerciseForm.touched"
   >
-    Form not completed!
+    Form not valid!
   </p>
 </mat-dialog-content>
 

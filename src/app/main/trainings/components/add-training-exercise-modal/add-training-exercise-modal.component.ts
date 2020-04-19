@@ -4,7 +4,7 @@ import { getExercises } from "./../../../exercises/store/exercise.selectors";
 import { ExerciseState } from "./../../../exercises/store/exercise.state";
 import { Observable } from "rxjs";
 import { MatDialogRef } from "@angular/material/dialog";
-import { Validators } from "@angular/forms";
+import { Validators, FormBuilder } from "@angular/forms";
 import { FormControl } from "@angular/forms";
 import { FormGroup } from "@angular/forms";
 import { Component, OnInit } from "@angular/core";
@@ -18,20 +18,21 @@ import { map, startWith } from "rxjs/operators";
   styleUrls: ["./add-training-exercise-modal.component.scss"],
 })
 export class AddTrainingExerciseModalComponent implements OnInit {
-  addTrainingExerciseForm = new FormGroup({
-    name: new FormControl("", Validators.required),
-    stateCtrl: new FormControl("", Validators.required),
-  });
-
   filteredExercises$: Observable<ExerciseModel[]>;
+  addTrainingExerciseForm = this.formBuilder.group({
+    exercise: ["", Validators.required],
+  });
 
   constructor(
     private dialogRef: MatDialogRef<AddTrainingExerciseModalComponent>,
-    private exerciseStore: Store<ExerciseState>,
+    private formBuilder: FormBuilder,
     private exerciseService: ExerciseClient
   ) {
-    this.addTrainingExerciseForm.get("stateCtrl").valueChanges
-      .subscribe((value) => this.filteredExercises$ = this.filterExercises(value));
+    this.addTrainingExerciseForm
+      .get("exercise")
+      .valueChanges.subscribe(
+        (value) => (this.filteredExercises$ = this.filterExercises(value))
+      );
   }
 
   ngOnInit(): void {}
@@ -44,7 +45,11 @@ export class AddTrainingExerciseModalComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  private filterExercises(value: string): Observable<ExerciseModel[]> {
+  getExerciseName(exercise) {
+    return exercise.name;
+  }
+
+  private filterExercises(value: String): Observable<ExerciseModel[]> {
     return this.exerciseService.getExercisesByTerm(value.toLowerCase());
   }
 }
