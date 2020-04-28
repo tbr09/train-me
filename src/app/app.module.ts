@@ -35,7 +35,7 @@ export function provideConfig() {
 }
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent ],
   imports: [
     BrowserModule,
     AppRoutingModule,

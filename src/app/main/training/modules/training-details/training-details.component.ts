@@ -1,12 +1,17 @@
-import { AddTrainingExerciseModalComponent } from "./../add-training-exercise-modal/add-training-exercise-modal.component";
+import { getTrainingDetails } from './store/training-details.selectors';
+import { TrainingDetailsActionTypes } from "./store/training-details.action";
+import { TrainingDetailsState } from "./store/training-details.state";
+import { AddTrainingExerciseModalComponent } from "./components/add-training-exercise-modal/add-training-exercise-modal.component";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
-import { categories } from "./../../../../constant/exercise.constant";
+import { categories } from "../../../../constant/exercise.constant";
 import { delay } from "rxjs/internal/operators";
 import { TrainingClient } from "../../../../services/api/api.service";
 import { Observable } from "rxjs";
 import { Component, OnInit, Input } from "@angular/core";
 import { TrainingModel } from "../../models/training.model";
 import { ActivatedRoute, Router } from "@angular/router";
+import { Store } from "@ngrx/store";
+import { TrainingDetailsActions } from "./store";
 
 @Component({
   selector: "app-training-details",
@@ -32,16 +37,18 @@ export class TrainingDetailsComponent implements OnInit {
   ];
 
   constructor(
-    private trainingClient: TrainingClient,
     private route: ActivatedRoute,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private trainingDetailsStore: Store<TrainingDetailsState>
   ) {
     this.route.params.subscribe((params) => {
       this.trainingId = params["id"];
-      this.training$ = this.trainingClient
-        .getTraining(this.trainingId)
-        .pipe(delay(500));
+      this.training$ = this.trainingDetailsStore.select(getTrainingDetails).pipe(delay(2000));
+
+      this.trainingDetailsStore.dispatch(
+        new TrainingDetailsActions.LoadTrainingDetails(this.trainingId)
+      );
     });
   }
 
@@ -65,7 +72,11 @@ export class TrainingDetailsComponent implements OnInit {
       .subscribe((result) => this.handleAddTrainingExerciseForm(result));
   }
 
-  handleAddTrainingExerciseForm(result) {}
+  handleAddTrainingExerciseForm(result) {
+    if (result !== undefined) {
+      // this.trainingClient.
+    }
+  }
 
   ngOnInit(): void {}
 }

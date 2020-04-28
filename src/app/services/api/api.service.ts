@@ -1,5 +1,5 @@
-import { TrainingExerciseModel } from "../../main/trainings/models/training-exercise.model";
-import { TrainingModel } from "../../main/trainings/models/training.model";
+import { TrainingExerciseModel } from "../../main/training/models/training-exercise.model";
+import { TrainingModel } from "../../main/training/models/training.model";
 import { LoginData } from "./../../login/models/logindata.model";
 import { Observable, defer } from "rxjs";
 import { BasicUserProfileModel } from "src/app/main/dashboard/models/userprofile.model";

@@ -5,9 +5,10 @@ import { ExercisesComponent } from './exercises.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'list',
     component: ExercisesComponent,
   },
+  { path: "", redirectTo: "list", pathMatch: "full" },
 ];
 
 @NgModule({

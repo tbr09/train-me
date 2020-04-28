@@ -2,18 +2,18 @@ import { Component, OnInit } from "@angular/core";
 import { delay } from "rxjs/internal/operators";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
-import { getTrainings, getIsLoading } from "./store/trainings.selectors";
-import { TrainingState } from "./store/trainings.state";
-import { TrainingActionTypes } from "./store/trainings.action";
-import { TrainingModel } from "./models/training.model";
+import { getTrainings, getIsLoading } from "../../store/trainings.selectors";
+import { TrainingState } from "../../store/trainings.state";
+import { TrainingActionTypes } from "../../store/trainings.action";
+import { TrainingModel } from "../../models/training.model";
 import { Router } from '@angular/router';
 
 @Component({
-  selector: "app-trainings",
-  templateUrl: "./trainings.component.html",
-  styleUrls: ["./trainings.component.scss"],
+  selector: "app-training-list",
+  templateUrl: "./training-list.component.html",
+  styleUrls: ["./training-list.component.scss"],
 })
-export class TrainingsComponent implements OnInit {
+export class TrainingListComponent implements OnInit {
   trainings$: Observable<TrainingModel[]>;
   filteredTrainings$: Observable<TrainingModel[]>;
 
@@ -34,6 +34,6 @@ export class TrainingsComponent implements OnInit {
   }
 
   navigateToTraining(row: any) {
-    this.router.navigate(["/training/" + row.id]);
+    this.router.navigate(["/training/details/" + row.id]);
   }
 }

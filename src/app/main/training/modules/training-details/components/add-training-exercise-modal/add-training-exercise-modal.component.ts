@@ -1,7 +1,7 @@
-import { ExerciseClient } from "./../../../../services/api/api.service";
+import { ExerciseClient } from "../../../../../../services/api/api.service";
 import { delay } from "rxjs/internal/operators";
-import { getExercises } from "./../../../exercises/store/exercise.selectors";
-import { ExerciseState } from "./../../../exercises/store/exercise.state";
+import { getExercises } from "../../../../../exercises/store/exercise.selectors";
+import { ExerciseState } from "../../../../../exercises/store/exercise.state";
 import { Observable } from "rxjs";
 import { MatDialogRef } from "@angular/material/dialog";
 import { Validators, FormBuilder } from "@angular/forms";

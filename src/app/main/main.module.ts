@@ -1,4 +1,4 @@
-import { TrainingsModule } from "./trainings/trainings.module";
+import { TrainingModule } from "./training/training.module";
 import { MainRoutingModule } from "./main-routing.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgModule } from "@angular/core";
@@ -13,7 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     CommonModule,
     DashboardModule,
-    TrainingsModule,
+    TrainingModule,
     FormsModule,
     ReactiveFormsModule,
     MainRoutingModule,
