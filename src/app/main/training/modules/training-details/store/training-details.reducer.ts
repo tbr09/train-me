@@ -34,6 +34,31 @@ export function createTrainingDetailsReducer(
         isError: true,
       };
     }
+    case TrainingDetailsActionTypes.AddExerciseToTraining: {
+      return {
+        ...state,
+        isLoading: true,
+        isError: null,
+      };
+    }
+    case TrainingDetailsActionTypes.AddExerciseToTrainingSuccess: {
+      return {
+        ...state,
+        selectedTraining: {
+          ...state.selectedTraining,
+          exercises: [...state.selectedTraining.exercises, action.response],
+        },
+        isLoading: false,
+        isError: null,
+      };
+    }
+    case TrainingDetailsActionTypes.AddExerciseToTrainingFail: {
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+      };
+    }
     default:
       return state;
   }

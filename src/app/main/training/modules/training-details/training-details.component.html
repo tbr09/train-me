@@ -1,10 +1,17 @@
-<p>{{ (training$ | async)?.name }}</p>
-
 <div class="spinner-container">
-  <mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
+  <mat-progress-bar
+    *ngIf="isLoading$ | async"
+    mode="indeterminate"
+  ></mat-progress-bar>
 </div>
 
-<button mat-button color="secondary" (click)="openAddTrainingExerciseFormDialog()">
+<p>{{ (training$ | async)?.name }}</p>
+
+<button
+  mat-button
+  color="secondary"
+  (click)="openAddTrainingExerciseFormDialog()"
+>
   <mat-icon>add</mat-icon> Add exercise
 </button>
 

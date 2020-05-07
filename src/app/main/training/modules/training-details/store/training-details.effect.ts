@@ -1,6 +1,8 @@
+import { NotificationService } from './../../../../../services/notification.service';
+import { HttpResponseBase } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Actions, ofType, Effect, createEffect } from "@ngrx/effects";
-import { Action } from "@ngrx/store";
+import { Action, Store } from "@ngrx/store";
 
 import { Observable, of } from "rxjs";
 import { map, catchError, switchMap } from "rxjs/operators";
@@ -12,7 +14,12 @@ import {
   LoadTrainingDetailsSuccess,
   LoadTrainingDetailsFail,
   TrainingDetailsActionTypes,
+  AddExerciseToTrainingSuccess,
+  AddExerciseToTrainingFail,
+  AddExerciseToTraining,
 } from "./training-details.action";
+import { TrainingDetailsState } from ".";
+import { TrainingExerciseModel } from "../../../models/training-exercise.model";
 
 @Injectable()
 export class TrainingDetailsEffects {
@@ -20,7 +27,7 @@ export class TrainingDetailsEffects {
     ofType(TrainingDetailsActionTypes.LoadTrainingDetails),
     switchMap((action: LoadTrainingDetails) => {
       const { trainingId } = action;
-      return this.TrainingService.getTraining(trainingId).pipe(
+      return this.trainingService.getTraining(trainingId).pipe(
         map((response) => new LoadTrainingDetailsSuccess(response)),
         catchError((error) => {
           return of(new LoadTrainingDetailsFail(error));
@@ -29,8 +36,39 @@ export class TrainingDetailsEffects {
     })
   );
 
+  @Effect() addExerciseToTraining$: Observable<Action> = this.actions$.pipe(
+    ofType(TrainingDetailsActionTypes.AddExerciseToTraining),
+    switchMap((action: AddExerciseToTraining) => {
+      const { trainingId, exerciseId, repetitions } = action;
+      return this.trainingService
+        .addExercise(trainingId, exerciseId, repetitions)
+        .pipe(
+          map(
+            (response: TrainingExerciseModel) =>
+              new AddExerciseToTrainingSuccess(response)
+          ),
+          catchError((error) => {
+            return of(new AddExerciseToTrainingFail(error));
+          })
+        );
+    })
+  );
+
+  @Effect() addExerciseToTrainingSuccess$: Observable<
+    void
+  > = this.actions$.pipe(
+    ofType(TrainingDetailsActionTypes.AddExerciseToTrainingSuccess),
+    map(() =>
+      this.notificationService.sendNotification(
+        "Exercise successfully added to training!"
+      )
+    )
+  );
+
   constructor(
     private actions$: Actions,
-    private TrainingService: TrainingClient
+    private trainingService: TrainingClient,
+    private trainingDetailsStore: Store<TrainingDetailsState>,
+    private notificationService: NotificationService
   ) {}
 }

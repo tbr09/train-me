@@ -40,7 +40,7 @@ import { TrainingListComponent } from './components/training-list/training-list.
     MatFormFieldModule,
     MatButtonModule,
     MatAutocompleteModule,
-    MatProgressSpinnerModule,
+    MatProgressSpinnerModule
   ],
   entryComponents: [],
 })

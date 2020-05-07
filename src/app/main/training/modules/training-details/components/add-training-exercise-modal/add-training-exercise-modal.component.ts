@@ -21,6 +21,7 @@ export class AddTrainingExerciseModalComponent implements OnInit {
   filteredExercises$: Observable<ExerciseModel[]>;
   addTrainingExerciseForm = this.formBuilder.group({
     exercise: ["", Validators.required],
+    repetitions: [[], Validators.required]
   });
 
   constructor(

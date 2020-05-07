@@ -1,4 +1,5 @@
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatButtonModule } from "@angular/material/button";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -45,6 +46,7 @@ import { BarRatingModule } from "ngx-bar-rating";
     MatButtonModule,
     MatAutocompleteModule,
     MatProgressSpinnerModule,
+    MatProgressBarModule
   ],
   entryComponents: [AddTrainingExerciseModalComponent],
 })

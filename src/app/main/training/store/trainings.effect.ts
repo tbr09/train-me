@@ -1,3 +1,5 @@
+import { AddExerciseToTrainingSuccess } from "./../modules/training-details/store/training-details.action";
+import { NotificationService } from "./../../../services/notification.service";
 import { Injectable } from "@angular/core";
 import { Actions, ofType, Effect, createEffect } from "@ngrx/effects";
 import { Action } from "@ngrx/store";
@@ -5,12 +7,12 @@ import { Action } from "@ngrx/store";
 import { Observable, of } from "rxjs";
 import { map, catchError, switchMap } from "rxjs/operators";
 
-import { TrainingClient } from '../../../services/api/api.service';
+import { TrainingClient } from "../../../services/api/api.service";
 
 import {
   TrainingActionTypes,
   LoadTrainingsSuccess,
-  LoadTrainingsFail
+  LoadTrainingsFail,
 } from "./trainings.action";
 
 @Injectable()
@@ -19,14 +21,16 @@ export class TrainingsEffects {
     ofType(TrainingActionTypes.LoadTrainings),
     switchMap(() => {
       return this.TrainingService.getTrainings().pipe(
-        map(response => new LoadTrainingsSuccess(response)),
-        catchError(error => {
+        map((response) => new LoadTrainingsSuccess(response)),
+        catchError((error) => {
           return of(new LoadTrainingsFail(error));
         })
       );
     })
   );
-
-
-  constructor(private actions$: Actions, private TrainingService: TrainingClient) {}
+  
+  constructor(
+    private actions$: Actions,
+    private TrainingService: TrainingClient
+  ) {}
 }

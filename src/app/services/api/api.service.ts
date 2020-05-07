@@ -5,23 +5,42 @@ import { Observable, defer } from "rxjs";
 import { BasicUserProfileModel } from "src/app/main/dashboard/models/userprofile.model";
 import { Injectable } from "@angular/core";
 import { ExerciseModel } from "src/app/main/exercises/models/exercise.model";
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponseBase } from "@angular/common/http";
 
 const apiUrl = "https://localhost:44389";
 
 export interface ITrainingService {
   getTrainings(): Observable<TrainingModel[]>;
   getTraining(id: number): Observable<TrainingModel>;
+  addExercise(
+    trainingId: number,
+    exerciseId: number,
+    repetitions: number[]
+  ): Observable<TrainingExerciseModel>;
 }
 
 @Injectable()
 export class TrainingClient implements ITrainingService {
+  constructor(private http: HttpClient) {}
+
   getTrainings(): Observable<TrainingModel[]> {
     return defer(() => Promise.resolve(trainings));
   }
 
   getTraining(id: number): Observable<TrainingModel> {
     return defer(() => Promise.resolve(trainings.find((t) => t.id == id)));
+  }
+
+  addExercise(
+    trainingId: number,
+    exerciseId: number,
+    repetitions: number[]
+  ): Observable<TrainingExerciseModel> {
+    return this.http.post<TrainingExerciseModel>(`${apiUrl}/training/addexercise`, {
+      trainingId: trainingId,
+      exerciseId: exerciseId,
+      repetitions: repetitions,
+    });
   }
 }
 

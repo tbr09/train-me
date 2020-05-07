@@ -1,3 +1,4 @@
+import { NotificationService } from './services/notification.service';
 import { MatButtonModule } from "@angular/material/button";
 import { EffectsModule } from "@ngrx/effects";
 import { BrowserModule } from "@angular/platform-browser";
@@ -57,7 +58,8 @@ export function provideConfig() {
       useFactory: provideConfig
     },
     ExerciseClient,
-    TrainingClient
+    TrainingClient,
+    NotificationService
   ],
   bootstrap: [AppComponent]
 })

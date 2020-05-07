@@ -1,5 +1,8 @@
-import { getTrainingDetails } from './store/training-details.selectors';
-import { TrainingDetailsActionTypes } from "./store/training-details.action";
+import { getTrainingDetails, getIsLoading, getIsError } from "./store/training-details.selectors";
+import {
+  TrainingDetailsActionTypes,
+  AddExerciseToTraining,
+} from "./store/training-details.action";
 import { TrainingDetailsState } from "./store/training-details.state";
 import { AddTrainingExerciseModalComponent } from "./components/add-training-exercise-modal/add-training-exercise-modal.component";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
@@ -10,7 +13,7 @@ import { Observable } from "rxjs";
 import { Component, OnInit, Input } from "@angular/core";
 import { TrainingModel } from "../../models/training.model";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Store } from "@ngrx/store";
+import { Store, select } from "@ngrx/store";
 import { TrainingDetailsActions } from "./store";
 
 @Component({
@@ -22,8 +25,9 @@ export class TrainingDetailsComponent implements OnInit {
   @Input()
   trainingId: number = 0;
 
-  isLoading$: Observable<boolean>;
   training$: Observable<TrainingModel>;
+  isLoading$: Observable<boolean>;
+  isError$: Observable<boolean>;
 
   addExerciseDialogRef: MatDialogRef<AddTrainingExerciseModalComponent>;
 
@@ -44,12 +48,16 @@ export class TrainingDetailsComponent implements OnInit {
   ) {
     this.route.params.subscribe((params) => {
       this.trainingId = params["id"];
-      this.training$ = this.trainingDetailsStore.select(getTrainingDetails).pipe(delay(2000));
+      this.training$ = this.trainingDetailsStore
+        .select(getTrainingDetails)
+        .pipe(delay(2000));
 
       this.trainingDetailsStore.dispatch(
         new TrainingDetailsActions.LoadTrainingDetails(this.trainingId)
       );
     });
+    this.isLoading$ = this.trainingDetailsStore.pipe(select(getIsLoading));
+    this.isError$ = this.trainingDetailsStore.pipe(select(getIsError));
   }
 
   navigateToExercise(row: any) {
@@ -74,7 +82,13 @@ export class TrainingDetailsComponent implements OnInit {
 
   handleAddTrainingExerciseForm(result) {
     if (result !== undefined) {
-      // this.trainingClient.
+      this.trainingDetailsStore.dispatch(
+        new AddExerciseToTraining(
+          Number(this.trainingId),
+          result.value.exercise.id,
+          result.value.repetitions.split(', ').map(Number)
+        )
+      );
     }
   }
 
