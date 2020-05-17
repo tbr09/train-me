@@ -9,8 +9,6 @@ export function createDashboardReducer(
   state = initialState, 
   action: DashboardActions
 ): DashboardState {
-  console.log(action);
-
   switch (action.type) {
     case DashboardActionTypes.LoadUser: {
       return {

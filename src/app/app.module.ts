@@ -19,6 +19,8 @@ import {
   GoogleLoginProvider,
   FacebookLoginProvider
 } from "angularx-social-login";
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 let config = new AuthServiceConfig([
   {
@@ -49,7 +51,8 @@ export function provideConfig() {
     MatToolbarModule,
     MatButtonModule,
     SocialLoginModule,
-    MatSidenavModule
+    MatSidenavModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     UserClient,

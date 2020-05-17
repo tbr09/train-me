@@ -9,8 +9,6 @@ export function createTrainingDetailsReducer(
   state = initialState,
   action: TrainingDetailsActions
 ): TrainingDetailsState {
-  console.log(action);
-
   switch (action.type) {
     case TrainingDetailsActionTypes.LoadTrainingDetails: {
       return {

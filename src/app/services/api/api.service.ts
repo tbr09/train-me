@@ -7,7 +7,9 @@ import { Injectable } from "@angular/core";
 import { ExerciseModel } from "src/app/main/exercises/models/exercise.model";
 import { HttpClient, HttpResponseBase } from "@angular/common/http";
 
-const apiUrl = "https://localhost:44389";
+// const apiUrl = "https://localhost:44389";
+const apiUrl = "https://trainme-webapp-cdn-dev.azurewebsites.net";
+
 
 export interface ITrainingService {
   getTrainings(): Observable<TrainingModel[]>;

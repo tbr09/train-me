@@ -33,7 +33,6 @@ export class TrainingDetailsComponent implements OnInit {
 
   categories = categories;
   displayedColumns: string[] = [
-    "exerciseId",
     "exerciseTitle",
     "category",
     "repetitions",

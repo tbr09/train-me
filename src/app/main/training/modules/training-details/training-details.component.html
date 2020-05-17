@@ -25,11 +25,6 @@
     [dataSource]="(training$ | async)?.exercises"
     class="mat-elevation-z8 training-exercises-table"
   >
-    <ng-container matColumnDef="exerciseId">
-      <th mat-header-cell *matHeaderCellDef>Id</th>
-      <td mat-cell *matCellDef="let element">{{ element.exerciseId }}</td>
-    </ng-container>
-
     <ng-container matColumnDef="exerciseTitle">
       <th mat-header-cell *matHeaderCellDef>Name</th>
       <td mat-cell *matCellDef="let element">{{ element.exerciseTitle }}</td>

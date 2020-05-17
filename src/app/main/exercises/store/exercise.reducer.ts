@@ -9,8 +9,6 @@ export function createExerciseReducer(
   state = initialState,
   action: ExerciseActions
 ): ExerciseState {
-  console.log(action);
-
   switch (action.type) {
     case ExerciseActionTypes.LoadExercises: {
       return {
