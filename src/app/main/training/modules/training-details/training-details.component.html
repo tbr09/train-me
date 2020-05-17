@@ -1,22 +1,22 @@
 <div class="spinner-container">
   <mat-progress-bar
-    *ngIf="isLoading$ | async"
+    *ngIf="(isLoading$ | async) || (isAsyncLoading$ | async)"
     mode="indeterminate"
   ></mat-progress-bar>
 </div>
 
 <p>{{ (training$ | async)?.name }}</p>
 
-<button
-  mat-button
-  color="secondary"
-  (click)="openAddTrainingExerciseFormDialog()"
->
-  <mat-icon>add</mat-icon> Add exercise
-</button>
-
-<div class="training-exercises-table-wrapper">
-  <div class="training-exercises-actions"></div>
+<div class="training-exercises-table-wrapper" *ngIf="!(isLoading$ | async)">
+  <div class="training-exercises-actions">
+    <button
+      mat-button
+      color="secondary"
+      (click)="openAddTrainingExerciseFormDialog()"
+    >
+      <mat-icon>add</mat-icon> Add exercise
+    </button>
+  </div>
 
   <div class="training-exercises-filters"></div>
 
@@ -56,11 +56,25 @@
       </td>
     </ng-container>
 
+    <ng-container matColumnDef="operations">
+      <th mat-header-cell *matHeaderCellDef>Operations</th>
+      <td mat-cell *matCellDef="let element">
+        <span class="table-row-operation" (click)="openExerciseDetails(element.id)"> Details </span>
+        <span class="table-row-operation" (click)="openEditExerciseTrainingModal(element.id)">Edit</span>
+        <span class="table-row-operation" (click)="deleteExerciseFromTraining(element.id)"> Delete </span>
+      </td>
+    </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr
       mat-row
-      (click)="navigateToExercise(row)"
       *matRowDef="let row; columns: displayedColumns"
     ></tr>
   </table>
+  <!-- TODO -->
+  <!-- <mat-paginator
+    [length]="(training$ | async)?.exercises.length"
+    [pageSizeOptions]="[10, 20, 50, 100]"
+    [pageSize]="10"
+    (page)="pageEvent = $event"
+  ></mat-paginator> -->
 </div>

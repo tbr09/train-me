@@ -1,7 +1,7 @@
 <div class="spinner-container">
   <mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
 </div>
-<div class="exercise-table-wrapper">
+<div class="exercise-table-wrapper" *ngIf="!(isLoading$ | async)">
   <div class="exercise-actions">
     <button mat-button color="secondary" (click)="openAddExerciseFormDialog()">
       <mat-icon>add</mat-icon> Add new exercise

@@ -3,16 +3,20 @@
 <h2 mat-dialog-title>Add exercise to training</h2>
 
 <mat-dialog-content [formGroup]="addTrainingExerciseForm">
-  <div mat-dialog-content>
+  <div mat-dialog-content class="add-training-exercise-form">
     <mat-form-field class="example-full-width">
       <input
         matInput
-        placeholder="Exercise"
+        placeholder="Exercise *"
         aria-label="exercise"
         [matAutocomplete]="auto"
         formControlName="exercise"
       />
-      <mat-autocomplete #auto="matAutocomplete" [displayWith]="getExerciseName">
+      <mat-autocomplete
+        #auto="matAutocomplete"
+        [displayWith]="getExerciseName"
+        (optionSelected)="updateSelectedExercise($event)"
+      >
         <mat-option
           *ngFor="let exercise of filteredExercises$ | async"
           [value]="exercise"
@@ -21,26 +25,75 @@
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
-    <mat-form-field class="example-full-width">
+    <mat-form-field>
       <input
         matInput
-        placeholder="Repetitions"
+        placeholder="Repetitions * (example: 10,8,6,4)"
         aria-label="repetitions"
         formControlName="repetitions"
       />
     </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="number"
+        placeholder="Break time * (seconds)"
+        aria-label="breakTime"
+        formControlName="breakTime"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Suggestions"
+        aria-label="suggestions"
+        formControlName="suggestion"
+      />
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input
+        matInput
+        placeholder="Alternative exercise"
+        aria-label="alternativeExercise"
+        [matAutocomplete]="auto"
+        formControlName="alternativeExercise"
+      />
+      <mat-autocomplete
+        #auto="matAutocomplete"
+        [displayWith]="getExerciseName"
+      >
+        <mat-option
+          *ngFor="let alternativeExercise of filteredExercises$ | async"
+          [value]="alternativeExercise"
+        >
+          <span>{{ alternativeExercise.name }}</span>
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+  <div
+    *ngIf="
+      addTrainingExerciseForm.invalid &&
+      (addTrainingExerciseForm.dirty || addTrainingExerciseForm.touched)
+    "
+    class="validation-error"
+  >
+    Fill all required fields!
   </div>
 
-  <p
-    style="color: red;"
-    [hidden]="addTrainingExerciseForm.valid || !addTrainingExerciseForm.touched"
-  >
-    Form not valid!
-  </p>
+  <div *ngIf="selectedExercise">
+    <div>Exercise details</div>
+    <div>{{ selectedExercise?.name }}</div>
+    <div>{{ bodyParts[selectedExercise?.bodyPart] }}</div>
+  </div>
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button class="mat-raised-button mat-primary" (click)="submit()">
+  <button
+    class="mat-raised-button mat-primary"
+    (click)="submit()"
+    [disabled]="addTrainingExerciseForm.invalid"
+  >
     Submit
   </button>
   <button class="mat-raised-button" (click)="close()">Close</button>

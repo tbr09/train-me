@@ -1,14 +1,18 @@
 .training-exercises-table-wrapper {
-    .training-exercises-actions {
-        margin-bottom: 10px;
-    }
-    .training-exercises-table {
-      width: 100%;
-      td,
-      th {
-        padding: 15px;
-        text-align: left;
+  .training-exercises-actions {
+    margin-bottom: 10px;
+  }
+  .training-exercises-table {
+    width: 100%;
+    td,
+    th {
+      padding: 15px;
+      text-align: left;
+      .table-row-operation {
+        &:hover{
+          cursor: pointer;
+        }
       }
     }
   }
-  
+}

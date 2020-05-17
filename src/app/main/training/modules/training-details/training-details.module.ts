@@ -21,9 +21,11 @@ import {
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
 import { BarRatingModule } from "ngx-bar-rating";
+import { EditTrainingExerciseModalComponent } from './components/edit-training-details-modal/edit-training-exercise-modal/edit-training-exercise-modal.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
-  declarations: [AddTrainingExerciseModalComponent, TrainingDetailsComponent],
+  declarations: [AddTrainingExerciseModalComponent, TrainingDetailsComponent, EditTrainingExerciseModalComponent],
   imports: [
     CommonModule,
     StoreModule.forFeature(
@@ -42,6 +44,7 @@ import { BarRatingModule } from "ngx-bar-rating";
     MatIconModule,
     MatDialogModule,
     MatTableModule,
+    MatPaginatorModule,
     MatFormFieldModule,
     MatButtonModule,
     MatAutocompleteModule,

@@ -1,4 +1,9 @@
-import { getTrainingDetails, getIsLoading, getIsError } from "./store/training-details.selectors";
+import {
+  getTrainingDetails,
+  getIsLoading,
+  getIsError,
+  getIsAsyncLoading,
+} from "./store/training-details.selectors";
 import {
   TrainingDetailsActionTypes,
   AddExerciseToTraining,
@@ -15,6 +20,7 @@ import { TrainingModel } from "../../models/training.model";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Store, select } from "@ngrx/store";
 import { TrainingDetailsActions } from "./store";
+import { PageEvent } from "@angular/material/paginator";
 
 @Component({
   selector: "app-training-details",
@@ -26,8 +32,11 @@ export class TrainingDetailsComponent implements OnInit {
   trainingId: number = 0;
 
   training$: Observable<TrainingModel>;
+  isAsyncLoading$: Observable<boolean>;
   isLoading$: Observable<boolean>;
   isError$: Observable<boolean>;
+
+  pageEvent: PageEvent;
 
   addExerciseDialogRef: MatDialogRef<AddTrainingExerciseModalComponent>;
 
@@ -37,6 +46,7 @@ export class TrainingDetailsComponent implements OnInit {
     "category",
     "repetitions",
     "difficulty",
+    "operations",
   ];
 
   constructor(
@@ -45,6 +55,12 @@ export class TrainingDetailsComponent implements OnInit {
     private dialog: MatDialog,
     private trainingDetailsStore: Store<TrainingDetailsState>
   ) {
+    this.isAsyncLoading$ = this.trainingDetailsStore.pipe(
+      select(getIsAsyncLoading)
+    );
+    this.isLoading$ = this.trainingDetailsStore.pipe(select(getIsLoading));
+    this.isError$ = this.trainingDetailsStore.pipe(select(getIsError));
+
     this.route.params.subscribe((params) => {
       this.trainingId = params["id"];
       this.training$ = this.trainingDetailsStore
@@ -55,19 +71,23 @@ export class TrainingDetailsComponent implements OnInit {
         new TrainingDetailsActions.LoadTrainingDetails(this.trainingId)
       );
     });
-    this.isLoading$ = this.trainingDetailsStore.pipe(select(getIsLoading));
-    this.isError$ = this.trainingDetailsStore.pipe(select(getIsError));
   }
 
   navigateToExercise(row: any) {
     this.router.navigate(["/exercise/" + row.exerciseId]);
   }
 
+  openEditExerciseTrainingModal(exerciseId: number) {}
+
+  deleteExerciseFromTraining(exerciseId: number) {}
+
+  openExerciseDetails(exerciseId: number) {}
+
   openAddTrainingExerciseFormDialog() {
     this.addExerciseDialogRef = this.dialog.open(
       AddTrainingExerciseModalComponent,
       {
-        width: "250px",
+        width: "40%",
         data: { name: "example name passed to modal form" },
         disableClose: true,
         autoFocus: true,
@@ -82,11 +102,14 @@ export class TrainingDetailsComponent implements OnInit {
   handleAddTrainingExerciseForm(result) {
     if (result !== undefined) {
       this.trainingDetailsStore.dispatch(
-        new AddExerciseToTraining(
-          Number(this.trainingId),
-          result.value.exercise.id,
-          result.value.repetitions.split(', ').map(Number)
-        )
+        new AddExerciseToTraining({
+          trainingId: Number(this.trainingId),
+          exerciseId: result.value.exercise.id,
+          repetitions: result.value.repetitions.split(",").map(Number),
+          breakTime: result.value.breakTime,
+          suggestion: result.value.suggestion,
+          alternativeExerciseId: result.value.alternativeExercise.id,
+        })
       );
     }
   }

@@ -1,3 +1,4 @@
+import { ExerciseModel } from "./../../../../../exercises/models/exercise.model";
 import { ExerciseClient } from "../../../../../../services/api/api.service";
 import { delay } from "rxjs/internal/operators";
 import { getExercises } from "../../../../../exercises/store/exercise.selectors";
@@ -8,9 +9,9 @@ import { Validators, FormBuilder } from "@angular/forms";
 import { FormControl } from "@angular/forms";
 import { FormGroup } from "@angular/forms";
 import { Component, OnInit } from "@angular/core";
-import { ExerciseModel } from "src/app/main/exercises/models/exercise.model";
 import { Store } from "@ngrx/store";
 import { map, startWith } from "rxjs/operators";
+import { bodyParts } from 'src/app/constant/exercise.constant';
 
 @Component({
   selector: "app-add-training-exercise-modal",
@@ -18,12 +19,19 @@ import { map, startWith } from "rxjs/operators";
   styleUrls: ["./add-training-exercise-modal.component.scss"],
 })
 export class AddTrainingExerciseModalComponent implements OnInit {
+  
   filteredExercises$: Observable<ExerciseModel[]>;
+  selectedExercise: ExerciseModel;
+  bodyParts = bodyParts;
+
   addTrainingExerciseForm = this.formBuilder.group({
     exercise: ["", Validators.required],
-    repetitions: [[], Validators.required]
+    repetitions: [[], Validators.compose([Validators.required, Validators.pattern('^\\d+(\\,\\d+)*$')])],
+    breakTime: [60, Validators.required],
+    suggestion: [""],
+    alternativeExercise: [""]
   });
-
+  
   constructor(
     private dialogRef: MatDialogRef<AddTrainingExerciseModalComponent>,
     private formBuilder: FormBuilder,
@@ -31,6 +39,12 @@ export class AddTrainingExerciseModalComponent implements OnInit {
   ) {
     this.addTrainingExerciseForm
       .get("exercise")
+      .valueChanges.subscribe(
+        (value) => (this.filteredExercises$ = this.filterExercises(value))
+      );
+
+      this.addTrainingExerciseForm
+      .get("alternativeExercise")
       .valueChanges.subscribe(
         (value) => (this.filteredExercises$ = this.filterExercises(value))
       );
@@ -51,6 +65,13 @@ export class AddTrainingExerciseModalComponent implements OnInit {
   }
 
   private filterExercises(value: String): Observable<ExerciseModel[]> {
-    return this.exerciseService.getExercisesByTerm(value.toLowerCase());
+    if (typeof value === "string") {
+      return this.exerciseService.getExercisesByTerm(value.toLowerCase());
+    }
   }
+
+  updateSelectedExercise($event) {
+    this.selectedExercise = $event.option.value;
+  }
+
 }

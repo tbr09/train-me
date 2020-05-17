@@ -1,4 +1,4 @@
-import { NotificationService } from './../../../../../services/notification.service';
+import { NotificationService } from "./../../../../../services/notification.service";
 import { HttpResponseBase } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Actions, ofType, Effect, createEffect } from "@ngrx/effects";
@@ -39,30 +39,20 @@ export class TrainingDetailsEffects {
   @Effect() addExerciseToTraining$: Observable<Action> = this.actions$.pipe(
     ofType(TrainingDetailsActionTypes.AddExerciseToTraining),
     switchMap((action: AddExerciseToTraining) => {
-      const { trainingId, exerciseId, repetitions } = action;
       return this.trainingService
-        .addExercise(trainingId, exerciseId, repetitions)
+        .addExercise(action.model)
         .pipe(
-          map(
-            (response: TrainingExerciseModel) =>
-              new AddExerciseToTrainingSuccess(response)
-          ),
+          map((response: TrainingExerciseModel) => {
+            this.notificationService.sendNotification(
+              "Exercise successfully added to training!"
+            );
+            return new AddExerciseToTrainingSuccess(response);
+          }),
           catchError((error) => {
             return of(new AddExerciseToTrainingFail(error));
           })
         );
     })
-  );
-
-  @Effect() addExerciseToTrainingSuccess$: Observable<
-    void
-  > = this.actions$.pipe(
-    ofType(TrainingDetailsActionTypes.AddExerciseToTrainingSuccess),
-    map(() =>
-      this.notificationService.sendNotification(
-        "Exercise successfully added to training!"
-      )
-    )
   );
 
   constructor(

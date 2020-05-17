@@ -35,7 +35,7 @@ export function createTrainingDetailsReducer(
     case TrainingDetailsActionTypes.AddExerciseToTraining: {
       return {
         ...state,
-        isLoading: true,
+        isAsyncLoading: true,
         isError: null,
       };
     }
@@ -46,14 +46,14 @@ export function createTrainingDetailsReducer(
           ...state.selectedTraining,
           exercises: [...state.selectedTraining.exercises, action.response],
         },
-        isLoading: false,
+        isAsyncLoading: false,
         isError: null,
       };
     }
     case TrainingDetailsActionTypes.AddExerciseToTrainingFail: {
       return {
-        ...state,
-        isLoading: false,
+        ...state,        
+        isAsyncLoading: false,
         isError: true,
       };
     }

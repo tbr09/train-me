@@ -6,18 +6,17 @@ import { BasicUserProfileModel } from "src/app/main/dashboard/models/userprofile
 import { Injectable } from "@angular/core";
 import { ExerciseModel } from "src/app/main/exercises/models/exercise.model";
 import { HttpClient, HttpResponseBase } from "@angular/common/http";
+import { delay } from "rxjs/operators";
+import { AddExerciseToTrainingModel } from "src/app/main/training/modules/training-details/models/add-exercise-to-training.model";
 
 // const apiUrl = "https://localhost:44389";
 const apiUrl = "https://trainme-webapp-cdn-dev.azurewebsites.net";
-
 
 export interface ITrainingService {
   getTrainings(): Observable<TrainingModel[]>;
   getTraining(id: number): Observable<TrainingModel>;
   addExercise(
-    trainingId: number,
-    exerciseId: number,
-    repetitions: number[]
+    model: AddExerciseToTrainingModel
   ): Observable<TrainingExerciseModel>;
 }
 
@@ -30,19 +29,22 @@ export class TrainingClient implements ITrainingService {
   }
 
   getTraining(id: number): Observable<TrainingModel> {
-    return defer(() => Promise.resolve(trainings.find((t) => t.id == id)));
+    return defer(() => Promise.resolve(trainings.find((t) => t.id == id))).pipe(
+      delay(2000)
+    );
   }
 
   addExercise(
-    trainingId: number,
-    exerciseId: number,
-    repetitions: number[]
+    model: AddExerciseToTrainingModel
   ): Observable<TrainingExerciseModel> {
-    return this.http.post<TrainingExerciseModel>(`${apiUrl}/training/addexercise`, {
-      trainingId: trainingId,
-      exerciseId: exerciseId,
-      repetitions: repetitions,
-    });
+    return this.http.post<TrainingExerciseModel>(
+      `${apiUrl}/training/addexercise`,
+      {
+        trainingId: model.trainingId,
+        exerciseId: model.exerciseId,
+        repetitions: model.repetitions,
+      }
+    );
   }
 }
 

@@ -1,6 +1,7 @@
 import { Action } from '@ngrx/store';
 import { TrainingModel } from '../../../models/training.model';
 import { TrainingExerciseModel } from '../../../models/training-exercise.model';
+import { AddExerciseToTrainingModel } from '../models/add-exercise-to-training.model';
 
 export enum TrainingDetailsActionTypes {
   LoadTrainingDetails = '[TrainingDetails] LoadTrainingDetails',
@@ -28,7 +29,7 @@ export class LoadTrainingDetailsFail implements Action {
 
 export class AddExerciseToTraining implements Action {
   readonly type = TrainingDetailsActionTypes.AddExerciseToTraining;
-  constructor(public trainingId: number, public exerciseId: number, public repetitions: number[]) {}
+  constructor(public model: AddExerciseToTrainingModel ) {}
 }
 
 export class AddExerciseToTrainingSuccess implements Action {
