@@ -7,7 +7,7 @@
     <mat-form-field class="example-full-width">
       <input
         matInput
-        placeholder="Exercise *"
+        placeholder="Exercise * (type to find exercises)"
         aria-label="exercise"
         [matAutocomplete]="auto"
         formControlName="exercise"
@@ -42,6 +42,14 @@
         formControlName="breakTime"
       />
     </mat-form-field>
+      <label>Weight (kg)</label>
+      <mat-slider
+      formControlName="weight"
+      min="1"
+      max="450"
+      step="1"
+      [thumbLabel]="true"
+    ></mat-slider>
     <mat-form-field>
       <input
         matInput
@@ -58,10 +66,7 @@
         [matAutocomplete]="auto"
         formControlName="alternativeExercise"
       />
-      <mat-autocomplete
-        #auto="matAutocomplete"
-        [displayWith]="getExerciseName"
-      >
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="getExerciseName">
         <mat-option
           *ngFor="let alternativeExercise of filteredExercises$ | async"
           [value]="alternativeExercise"

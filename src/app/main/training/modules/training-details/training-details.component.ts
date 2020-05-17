@@ -3,29 +3,29 @@ import {
   getIsLoading,
   getIsError,
   getIsAsyncLoading,
-} from "./store/training-details.selectors";
+} from './store/training-details.selectors';
 import {
   TrainingDetailsActionTypes,
   AddExerciseToTraining,
-} from "./store/training-details.action";
-import { TrainingDetailsState } from "./store/training-details.state";
-import { AddTrainingExerciseModalComponent } from "./components/add-training-exercise-modal/add-training-exercise-modal.component";
-import { MatDialog, MatDialogRef } from "@angular/material/dialog";
-import { categories } from "../../../../constant/exercise.constant";
-import { delay } from "rxjs/internal/operators";
-import { TrainingClient } from "../../../../services/api/api.service";
-import { Observable } from "rxjs";
-import { Component, OnInit, Input } from "@angular/core";
-import { TrainingModel } from "../../models/training.model";
-import { ActivatedRoute, Router } from "@angular/router";
-import { Store, select } from "@ngrx/store";
-import { TrainingDetailsActions } from "./store";
-import { PageEvent } from "@angular/material/paginator";
+} from './store/training-details.action';
+import { TrainingDetailsState } from './store/training-details.state';
+import { AddTrainingExerciseModalComponent } from './components/add-training-exercise-modal/add-training-exercise-modal.component';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { categories } from '../../../../constant/exercise.constant';
+import { delay } from 'rxjs/internal/operators';
+import { TrainingClient } from '../../../../services/api/api.service';
+import { Observable } from 'rxjs';
+import { Component, OnInit, Input } from '@angular/core';
+import { TrainingModel } from '../../models/training.model';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Store, select } from '@ngrx/store';
+import { TrainingDetailsActions } from './store';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
-  selector: "app-training-details",
-  templateUrl: "./training-details.component.html",
-  styleUrls: ["./training-details.component.scss"],
+  selector: 'app-training-details',
+  templateUrl: './training-details.component.html',
+  styleUrls: ['./training-details.component.scss'],
 })
 export class TrainingDetailsComponent implements OnInit {
   @Input()
@@ -42,11 +42,11 @@ export class TrainingDetailsComponent implements OnInit {
 
   categories = categories;
   displayedColumns: string[] = [
-    "exerciseTitle",
-    "category",
-    "repetitions",
-    "difficulty",
-    "operations",
+    'exerciseTitle',
+    'category',
+    'repetitions',
+    'difficulty',
+    'operations',
   ];
 
   constructor(
@@ -62,7 +62,7 @@ export class TrainingDetailsComponent implements OnInit {
     this.isError$ = this.trainingDetailsStore.pipe(select(getIsError));
 
     this.route.params.subscribe((params) => {
-      this.trainingId = params["id"];
+      this.trainingId = params['id'];
       this.training$ = this.trainingDetailsStore
         .select(getTrainingDetails)
         .pipe(delay(2000));
@@ -74,7 +74,7 @@ export class TrainingDetailsComponent implements OnInit {
   }
 
   navigateToExercise(row: any) {
-    this.router.navigate(["/exercise/" + row.exerciseId]);
+    this.router.navigate(['/exercise/' + row.exerciseId]);
   }
 
   openEditExerciseTrainingModal(exerciseId: number) {}
@@ -87,8 +87,8 @@ export class TrainingDetailsComponent implements OnInit {
     this.addExerciseDialogRef = this.dialog.open(
       AddTrainingExerciseModalComponent,
       {
-        width: "40%",
-        data: { name: "example name passed to modal form" },
+        width: '40%',
+        data: { name: 'example name passed to modal form' },
         disableClose: true,
         autoFocus: true,
       }
@@ -105,7 +105,7 @@ export class TrainingDetailsComponent implements OnInit {
         new AddExerciseToTraining({
           trainingId: Number(this.trainingId),
           exerciseId: result.value.exercise.id,
-          repetitions: result.value.repetitions.split(",").map(Number),
+          repetitions: result.value.repetitions.split(',').map(Number),
           breakTime: result.value.breakTime,
           suggestion: result.value.suggestion,
           alternativeExerciseId: result.value.alternativeExercise.id,

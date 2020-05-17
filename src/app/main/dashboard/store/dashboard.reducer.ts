@@ -1,12 +1,9 @@
-import {
-  DashboardActionTypes,
-  DashboardActions
-} from "./dashboard.action";
-import { initialState, DashboardState } from "./dashboard.state";
-import { ActionReducerMap } from "@ngrx/store";
+import { DashboardActionTypes, DashboardActions } from './dashboard.action';
+import { initialState, DashboardState } from './dashboard.state';
+import { ActionReducerMap } from '@ngrx/store';
 
 export function createDashboardReducer(
-  state = initialState, 
+  state = initialState,
   action: DashboardActions
 ): DashboardState {
   switch (action.type) {
@@ -14,7 +11,7 @@ export function createDashboardReducer(
       return {
         ...state,
         isLoading: true,
-        isError: null
+        isError: null,
       };
     }
     case DashboardActionTypes.LoadUserSuccess: {
@@ -22,14 +19,14 @@ export function createDashboardReducer(
         ...state,
         profile: action.payload,
         isLoading: false,
-        isError: null
+        isError: null,
       };
     }
     case DashboardActionTypes.LoadUserFail: {
       return {
         ...state,
         isLoading: false,
-        isError: true
+        isError: true,
       };
     }
     default:

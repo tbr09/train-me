@@ -1,36 +1,40 @@
 import { NotificationService } from './services/notification.service';
-import { MatButtonModule } from "@angular/material/button";
-import { EffectsModule } from "@ngrx/effects";
-import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { StoreModule } from "@ngrx/store";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { MatToolbarModule } from "@angular/material/toolbar";
-import { MatSidenavModule } from "@angular/material/sidenav";
+import { MatButtonModule } from '@angular/material/button';
+import { EffectsModule } from '@ngrx/effects';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { StoreModule } from '@ngrx/store';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
-import { AppRoutingModule } from "./app-routing.module";
-import { AppComponent } from "./app.component";
-import { UserClient, ExerciseClient, TrainingClient } from "./services/api/api.service";
-import { MainModule } from "./main/main.module";
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import {
+  UserClient,
+  ExerciseClient,
+  TrainingClient,
+} from './services/api/api.service';
+import { MainModule } from './main/main.module';
 
-import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
+import { SocialLoginModule, AuthServiceConfig } from 'angularx-social-login';
 import {
   GoogleLoginProvider,
-  FacebookLoginProvider
-} from "angularx-social-login";
+  FacebookLoginProvider,
+} from 'angularx-social-login';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
 let config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
-    provider: new GoogleLoginProvider("Google-OAuth-Client-Id")
+    provider: new GoogleLoginProvider('Google-OAuth-Client-Id'),
   },
   {
     id: FacebookLoginProvider.PROVIDER_ID,
-    provider: new FacebookLoginProvider("Facebook-App-Id")
-  }
+    provider: new FacebookLoginProvider('Facebook-App-Id'),
+  },
 ]);
 
 export function provideConfig() {
@@ -38,7 +42,7 @@ export function provideConfig() {
 }
 
 @NgModule({
-  declarations: [AppComponent ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -52,18 +56,20 @@ export function provideConfig() {
     MatButtonModule,
     SocialLoginModule,
     MatSidenavModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+    }),
   ],
   providers: [
     UserClient,
     {
       provide: AuthServiceConfig,
-      useFactory: provideConfig
+      useFactory: provideConfig,
     },
     ExerciseClient,
     TrainingClient,
-    NotificationService
+    NotificationService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
