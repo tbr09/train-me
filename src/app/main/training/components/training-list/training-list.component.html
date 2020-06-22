@@ -1,36 +1,82 @@
 <div class="spinner-container">
-    <mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
-  </div>
-  <div class="trainings-table-wrapper">
-    <div class="trainings-actions">
-      <!-- <button mat-button color="secondary" (click)="openAddExerciseFormDialog()">
-          <mat-icon>add</mat-icon> Add new exercise
-        </button> -->
-    </div>
-  
-    <div class="trainings-filters"></div>
-  
-    <table
-      mat-table
-      [dataSource]="trainings$ | async"
-      class="mat-elevation-z8 exercise-table"
+  <mat-progress-bar
+    *ngIf="(isLoading$ | async) || (isAsyncLoading$ | async)"
+    mode="indeterminate"
+  ></mat-progress-bar>
+</div>
+
+<div class="trainings-table-wrapper">
+  <div class="trainings-actions">
+    <button
+      mat-button
+      color="secondary"
+      (click)="openAddTrainingFormDialog()"
     >
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef>Id</th>
-        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-      </ng-container>
-  
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef>Name</th>
-        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-      </ng-container>
-  
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr
-        mat-row
-        (click)="navigateToTraining(row)"
-        *matRowDef="let row; columns: displayedColumns"
-      ></tr>
-    </table>
+      <mat-icon>add</mat-icon> Add training
+    </button>
   </div>
-  
+
+  <div class="trainings-filters"></div>
+
+  <table
+    mat-table
+    [dataSource]="trainings$ | async"
+    class="mat-elevation-z8 training-table"
+  >
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef>Description</th>
+      <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="trainingType">
+      <th mat-header-cell *matHeaderCellDef>Training type</th>
+      <td mat-cell *matCellDef="let element">
+        {{ trainingTypes[element.trainingType] }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="difficulty">
+      <th mat-header-cell *matHeaderCellDef>Difficulty</th>
+      <td mat-cell *matCellDef="let element">
+        <bar-rating
+          [theme]="'horizontal'"
+          [(rate)]="element.difficulty"
+          [max]="5"
+          [readOnly]="true"
+        ></bar-rating>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="operations">
+      <th mat-header-cell *matHeaderCellDef>Operations</th>
+      <td mat-cell *matCellDef="let element">
+        <span
+          class="table-row-operation"
+          (click)="openTrainingDetails(element.id)"
+        >
+          Details
+        </span>
+        <span
+          class="table-row-operation"
+          (click)="openEditTrainingModal(element.id)"
+          >Edit</span
+        >
+        <span class="table-row-operation" (click)="deleteTraining(element.id)">
+          Delete
+        </span>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+      mat-row
+      (click)="navigateToTraining(row)"
+      *matRowDef="let row; columns: displayedColumns"
+    ></tr>
+  </table>
+</div>

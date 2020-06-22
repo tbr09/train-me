@@ -4,12 +4,24 @@
   }
   .training-exercises-table {
     width: 100%;
+    .mat-column-name,
+    .mat-column-category,
+    .mat-column-repetitions {
+      width: 20%;
+    }
+    .mat-column-difficulty {
+      width: 15%;
+      padding: 0;
+    }
+    .mat-column-operations {
+      width: 25%;
+    }
     td,
     th {
       padding: 15px;
       text-align: left;
       .table-row-operation {
-        &:hover{
+        &:hover {
           cursor: pointer;
         }
       }

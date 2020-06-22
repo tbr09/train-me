@@ -30,8 +30,8 @@ import { PageEvent } from '@angular/material/paginator';
 export class TrainingDetailsComponent implements OnInit {
   @Input()
   trainingId: number = 0;
-
   training$: Observable<TrainingModel>;
+  
   isAsyncLoading$: Observable<boolean>;
   isLoading$: Observable<boolean>;
   isError$: Observable<boolean>;

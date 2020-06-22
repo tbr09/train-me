@@ -1,0 +1,31 @@
+<!-- Reactive forms-->
+
+<h2 mat-dialog-title>Add new training</h2>
+
+<mat-dialog-content [formGroup]="addTrainingForm">
+  <div mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <input matInput formControlName="description" />
+    </mat-form-field>
+
+  </div>
+  <p
+    style="color: red;"
+    [hidden]="addTrainingForm.valid || !addTrainingForm.touched"
+  >
+    Form not completed!
+  </p>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button class="mat-raised-button mat-primary" (click)="submit()">
+    Submit
+  </button>
+  <button class="mat-raised-button" (click)="close()">Close</button>
+</mat-dialog-actions>

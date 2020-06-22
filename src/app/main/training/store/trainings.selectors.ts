@@ -16,6 +16,8 @@ export const getTrainingsState = (state: TrainingState) => state.trainings;
 
 export const getIsLoadingState = (state: TrainingState) => state.isLoading;
 
+export const getIsAsyncLoadingState = (state: TrainingState) => state.isAsyncLoading;
+
 export const getIsErrorState = (state: TrainingState) => state.isError;
 
 export const getTrainings: MemoizedSelector<
@@ -24,6 +26,11 @@ export const getTrainings: MemoizedSelector<
 > = createSelector(getFeatureState, getTrainingsState);
 
 export const getIsLoading: MemoizedSelector<
+  TrainingState,
+  boolean
+> = createSelector(getFeatureState, getIsLoadingState);
+
+export const getIsAsyncLoading: MemoizedSelector<
   TrainingState,
   boolean
 > = createSelector(getFeatureState, getIsLoadingState);

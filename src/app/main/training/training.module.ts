@@ -20,9 +20,12 @@ import { createTrainingReducer } from "./store";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { TrainingDetailsModule } from "./modules/training-details/training-details.module";
 import { TrainingListComponent } from './components/training-list/training-list.component';
+import { BarRatingModule } from 'ngx-bar-rating';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { AddTrainingModalComponent } from './components/add-training-modal/add-training-modal.component';
 
 @NgModule({
-  declarations: [TrainingComponent, TrainingListComponent],
+  declarations: [TrainingComponent, TrainingListComponent, AddTrainingModalComponent],
   imports: [
     CommonModule,
     TrainingsRoutingModule,
@@ -34,14 +37,16 @@ import { TrainingListComponent } from './components/training-list/training-list.
     FormsModule,
     ReactiveFormsModule,
     MatTableModule,
+    BarRatingModule,
     MatInputModule,
     MatIconModule,
     MatDialogModule,
     MatFormFieldModule,
     MatButtonModule,
     MatAutocompleteModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatProgressBarModule,
   ],
-  entryComponents: [],
+  entryComponents: [AddTrainingModalComponent],
 })
 export class TrainingModule {}

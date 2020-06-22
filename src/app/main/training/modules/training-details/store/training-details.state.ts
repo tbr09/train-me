@@ -15,6 +15,8 @@ export const initialState: TrainingDetailsState = {
     id: 1,
     name: "Trening 1",
     description: "Opis treningu 1",
+    trainingType: 1,
+    difficulty: 0,
     exercises: [
       {
         repetitions: [12, 10, 8],

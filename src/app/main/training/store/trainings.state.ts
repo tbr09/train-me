@@ -6,6 +6,7 @@ export const trainingStateName = "trainingStateName";
 export interface TrainingState {
   trainings: TrainingModel[];
   isLoading: boolean;
+  isAsyncLoading: boolean;
   isError: boolean;
 }
 
@@ -28,5 +29,6 @@ export const initialState: TrainingState = {
     } as TrainingModel,
   ],
   isLoading: true,
+  isAsyncLoading: false,
   isError: null,
 };

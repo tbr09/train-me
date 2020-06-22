@@ -1,9 +1,6 @@
-import {
-  TrainingActionTypes,
-  TrainingActions,
-} from "./trainings.action";
-import { initialState, TrainingState } from "./trainings.state";
-import { ActionReducerMap } from "@ngrx/store";
+import { TrainingActionTypes, TrainingActions } from './trainings.action';
+import { initialState, TrainingState } from './trainings.state';
+import { ActionReducerMap } from '@ngrx/store';
 
 export function createTrainingReducer(
   state = initialState,
@@ -34,6 +31,7 @@ export function createTrainingReducer(
     }
     case TrainingActionTypes.AddTraining: {
       return {
+        ...state,
         trainings: [...state.trainings, action.payload],
         isLoading: false,
         isError: true,

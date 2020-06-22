@@ -130,6 +130,8 @@ const trainings = [
     id: 1,
     name: "Trening 1",
     description: "Opis treningu 1",
+    trainingType: 1,
+    difficulty: 0,
     exercises: [
       {
         repetitions: [12, 10, 8],
@@ -144,6 +146,8 @@ const trainings = [
   {
     id: 2,
     name: "Trening 2",
+    trainingType: 4,
+    difficulty: 2,
     exercises: [
       {
         repetitions: [12, 10, 8],
