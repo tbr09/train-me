@@ -1,3 +1,4 @@
+import { SharedModule } from './shared/shared.module';
 import { NotificationService } from './services/notification.service';
 import { MatButtonModule } from '@angular/material/button';
 import { EffectsModule } from '@ngrx/effects';
@@ -45,13 +46,13 @@ export function provideConfig() {
   declarations: [AppComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
     MainModule,
+    AppRoutingModule,
     MatToolbarModule,
     MatButtonModule,
     SocialLoginModule,
@@ -59,6 +60,7 @@ export function provideConfig() {
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
     }),
+    SharedModule
   ],
   providers: [
     UserClient,
@@ -66,9 +68,6 @@ export function provideConfig() {
       provide: AuthServiceConfig,
       useFactory: provideConfig,
     },
-    ExerciseClient,
-    TrainingClient,
-    NotificationService,
   ],
   bootstrap: [AppComponent],
 })

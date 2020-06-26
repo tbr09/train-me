@@ -28,7 +28,7 @@ import { PageEvent } from '@angular/material/paginator';
   styleUrls: ['./training-details.component.scss'],
 })
 export class TrainingDetailsComponent implements OnInit {
-  @Input()
+
   trainingId: number = 0;
   training$: Observable<TrainingModel>;
   

@@ -11,17 +11,17 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatTableModule } from "@angular/material/table";
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatAutocompleteModule } from "@angular/material/autocomplete";
 
 import { TrainingsEffects } from "./store/trainings.effect";
 import { trainingStateName, initialState } from "./store/trainings.state";
 import { TrainingsRoutingModule } from "./training-routing.module";
 import { TrainingComponent } from "./training.component";
 import { createTrainingReducer } from "./store";
-import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { TrainingDetailsModule } from "./modules/training-details/training-details.module";
 import { TrainingListComponent } from './components/training-list/training-list.component';
 import { BarRatingModule } from 'ngx-bar-rating';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { AddTrainingModalComponent } from './components/add-training-modal/add-training-modal.component';
 
 @NgModule({

@@ -20,7 +20,9 @@ export interface ITrainingService {
   ): Observable<TrainingExerciseModel>;
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class TrainingClient implements ITrainingService {
   constructor(private http: HttpClient) {}
 
@@ -52,7 +54,9 @@ export interface IUserService {
   userProfile(): Observable<BasicUserProfileModel>;
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class UserClient implements IUserService {
   userProfile(): Observable<BasicUserProfileModel> {
     const returnValue = {
@@ -69,7 +73,9 @@ export interface IExerciseService {
   getExercisesByTerm(name: string): Observable<ExerciseModel[]>;
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ExerciseClient implements IExerciseService {
   constructor(private http: HttpClient) {}
 
@@ -118,7 +124,9 @@ export interface IAuthService {
   login(loginData: LoginData): Observable<string>;
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthClient implements IAuthService {
   login(): Observable<string> {
     return defer(() => Promise.resolve("token"));

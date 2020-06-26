@@ -7,7 +7,9 @@ import {
   MatSnackBarRef,
 } from "@angular/material/snack-bar";
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class NotificationService {
   snackBarConfig: MatSnackBarConfig;
   snackBarRef: MatSnackBarRef<any>;

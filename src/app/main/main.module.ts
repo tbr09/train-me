@@ -1,3 +1,4 @@
+import { ExercisesModule } from './exercises/exercises.module';
 import { TrainingModule } from "./training/training.module";
 import { MainRoutingModule } from "./main-routing.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -14,6 +15,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
   imports: [
     CommonModule,
     DashboardModule,
+    ExercisesModule,
     TrainingModule,
     FormsModule,
     ReactiveFormsModule,
