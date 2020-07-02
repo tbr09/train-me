@@ -1,0 +1,16 @@
+.client-table {
+    width: 100%;
+    .mat-column-id,
+    .mat-column-name {
+      width: 20%;
+    }
+    .mat-column-operations {
+      width: 25%;
+    }
+    td,
+    th {
+      padding: 2%;
+      text-align: left;
+    }
+  }
+  

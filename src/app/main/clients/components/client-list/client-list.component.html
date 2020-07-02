@@ -1,0 +1,60 @@
+<div class="spinner-container">
+    <mat-progress-bar
+      *ngIf="(isLoading$ | async) || (isAsyncLoading$ | async)"
+      mode="indeterminate"
+    ></mat-progress-bar>
+  </div>
+  
+  <div class="clients-table-wrapper">
+    <div class="clients-actions">
+      <button
+        mat-button
+        color="secondary"
+        (click)="openAddClientFormDialog()"
+      >
+        <mat-icon>add</mat-icon> Send invite to client
+      </button>
+    </div>
+  
+    <div class="clients-filters"></div>
+  
+    <table
+      mat-table
+      [dataSource]="clients$ | async"
+      class="mat-elevation-z8 client-table"
+    >
+    
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>Id</th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      </ng-container>
+  
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      </ng-container>
+  
+      <ng-container matColumnDef="operations">
+        <th mat-header-cell *matHeaderCellDef>Operations</th>
+        <td mat-cell *matCellDef="let element">
+          <span
+            class="table-row-operation"
+            (click)="openClientDetails(element.id)"
+          >
+            Details
+          </span>
+          <span class="table-row-operation" (click)="deleteClient(element.id)">
+            Delete
+          </span>
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr
+        mat-row
+        (click)="navigateToClient(row)"
+        *matRowDef="let row; columns: displayedColumns"
+      ></tr>
+    </table>
+  </div>
+  
