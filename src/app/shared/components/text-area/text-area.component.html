@@ -1,0 +1,8 @@
+<mat-form-field>
+  <textarea
+    matInput
+    (keyup)="textAreaChanged($event.target.value)"
+    [value]="value"
+  ></textarea>
+  <div>{{ charCounter }} / {{ charLimit }}</div>
+</mat-form-field>

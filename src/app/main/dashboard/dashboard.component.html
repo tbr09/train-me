@@ -1,6 +1,11 @@
 <div>
   <p>dashboard works!</p>
   <div *ngIf="user$">
-    Hello, {{(user$ | async).firstName}} {{(user$ | async).lastName}}
+    Hello, {{ (user$ | async).firstName }} {{ (user$ | async).lastName }}
   </div>
+  <app-text-area
+    textChanged="textChanged()"
+    initialValue="qpa"
+    charLimit="10"
+  ></app-text-area>
 </div>

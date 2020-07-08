@@ -9,6 +9,7 @@ import { DashboardComponent } from './dashboard.component';
 import { dashboardStateName, initialState } from './store/dashboard.state';
 import { DashboardEffects } from './store/dashboard.effect';
 import { createDashboardReducer } from './store';
+import { TextAreaModule } from '../../shared/components/text-area/text-area.module';
 
 @NgModule({
   declarations: [DashboardComponent],
@@ -19,7 +20,8 @@ import { createDashboardReducer } from './store';
     }),
     EffectsModule.forFeature([DashboardEffects]),
     DashboardRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TextAreaModule
   ],
   exports: [ DashboardComponent ]
 })
