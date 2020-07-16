@@ -1,12 +1,9 @@
-import {
-  categories,
-  bodyParts,
-} from "./../../../../constant/exercise.constant";
 import { Component, OnInit } from "@angular/core";
 import {
   MatDialogRef,
 } from "@angular/material/dialog";
 import { FormControl, Validators, FormGroup } from "@angular/forms";
+import { Constants } from 'src/app/constants/constants';
 
 @Component({
   selector: "app-add-exercise-modal",
@@ -21,8 +18,8 @@ export class AddExerciseModalComponent implements OnInit {
     bodyPart: new FormControl(""),
   });
 
-  categories = categories.map((cat, i) => ({ value: i, viewValue: cat }));
-  bodyParts = bodyParts.map((bp, i) => ({ value: i, viewValue: bp }));
+  categories = Constants.categories.map((cat, i) => ({ value: i, viewValue: cat }));
+  bodyParts =  Constants.bodyParts.map((bp, i) => ({ value: i, viewValue: bp }));
 
   constructor(private dialogRef: MatDialogRef<AddExerciseModalComponent>) {}
 

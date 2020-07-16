@@ -11,9 +11,9 @@ import { TrainingState } from '../../store/trainings.state';
 import { TrainingActionTypes } from '../../store/trainings.action';
 import { TrainingModel } from '../../models/training.model';
 import { Router } from '@angular/router';
-import { trainingTypes } from 'src/app/constant/exercise.constant';
 import { AddTrainingModalComponent } from '../add-training-modal/add-training-modal.component';
 import { MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { Constants } from 'src/app/constants/constants';
 
 @Component({
   selector: 'app-training-list',
@@ -29,7 +29,7 @@ export class TrainingListComponent implements OnInit {
 
   addTrainingDialogRef: MatDialogRef<AddTrainingModalComponent>;
 
-  trainingTypes = trainingTypes;
+  trainingTypes = Constants.trainingTypes;
   displayedColumns: string[] = [
     // 'id',
     'name',

@@ -7,7 +7,8 @@
     <a class="toolbar-element" routerLink="/training">Trainings</a>
     <a class="toolbar-element" routerLink="/client">Trainer panel</a>
     <span class="example-spacer"></span> 
-    <a mat-button routerLink="/login">Login</a>
+    <a *ngIf="!isLoggedIn" mat-button (click)="login()">Login</a>
+    <a *ngIf="isLoggedIn" mat-button (click)="logout()">Logout</a>
     <a mat-raised-button color="primary" routerLink="/register">Register</a>
     <!-- <mat-icon class="example-icon" aria-hidden="false" aria-label="Example heart icon">verified_user</mat-icon> -->
   </mat-toolbar-row>

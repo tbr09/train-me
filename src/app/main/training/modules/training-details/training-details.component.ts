@@ -1,3 +1,4 @@
+import { Constants } from 'src/app/constants/constants';
 import {
   getTrainingDetails,
   getIsLoading,
@@ -11,7 +12,6 @@ import {
 import { TrainingDetailsState } from './store/training-details.state';
 import { AddTrainingExerciseModalComponent } from './components/add-training-exercise-modal/add-training-exercise-modal.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { categories } from '../../../../constant/exercise.constant';
 import { delay } from 'rxjs/internal/operators';
 import { TrainingClient } from '../../../../services/api/api.service';
 import { Observable } from 'rxjs';
@@ -40,7 +40,7 @@ export class TrainingDetailsComponent implements OnInit {
 
   addExerciseDialogRef: MatDialogRef<AddTrainingExerciseModalComponent>;
 
-  categories = categories;
+  categories = Constants.categories;
   displayedColumns: string[] = [
     'exerciseTitle',
     'category',

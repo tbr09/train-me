@@ -6,12 +6,12 @@ import { Store } from "@ngrx/store";
 
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 
-import { categories, bodyParts } from "./../../constant/exercise.constant";
 import { AddExerciseModalComponent } from "./components/add-exercise-modal/add-exercise-modal.component";
 import { ExerciseActionTypes } from "./store/exercise.action";
 import { getExercises, getIsLoading } from "./store/exercise.selectors";
 import { ExerciseModel } from "./models/exercise.model";
 import { ExerciseState, ExerciseActions } from "./store";
+import { Constants } from 'src/app/constants/constants';
 
 @Component({
   selector: "app-exercises",
@@ -25,9 +25,9 @@ export class ExercisesComponent implements OnInit {
   isLoading$: Observable<boolean>;
   addExerciseDialogRef: MatDialogRef<AddExerciseModalComponent>;
 
-  categories = categories;
-  categoriesSelect = categories.map((cat, i) => ({ value: i, viewValue: cat }));
-  bodyParts = bodyParts;
+  categories = Constants.categories;
+  categoriesSelect = Constants.categories.map((cat, i) => ({ value: i, viewValue: cat }));
+  bodyParts = Constants.bodyParts;
 
   displayedColumns: string[] = [
     "id",

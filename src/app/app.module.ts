@@ -1,3 +1,5 @@
+import { SignoutRedirectCallbackComponent } from './shared/auth/signout-redirect-callback.component';
+import { SigninRedirectCallbackComponent } from './shared/auth/signin-redirect-callback.component';
 import { SharedModule } from './shared/shared.module';
 import { NotificationService } from './services/notification.service';
 import { MatButtonModule } from '@angular/material/button';
@@ -43,7 +45,11 @@ export function provideConfig() {
 }
 
 @NgModule({
-  declarations: [AppComponent ],
+  declarations: [
+    AppComponent,
+    SigninRedirectCallbackComponent,
+    SignoutRedirectCallbackComponent,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -60,7 +66,7 @@ export function provideConfig() {
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
     }),
-    SharedModule
+    SharedModule,
   ],
   providers: [
     UserClient,

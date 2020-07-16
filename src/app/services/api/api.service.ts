@@ -1,16 +1,19 @@
-import { TrainingExerciseModel } from "../../main/training/models/training-exercise.model";
-import { TrainingModel } from "../../main/training/models/training.model";
-import { LoginData } from "./../../login/models/logindata.model";
-import { Observable, defer } from "rxjs";
-import { BasicUserProfileModel } from "src/app/main/dashboard/models/userprofile.model";
-import { Injectable } from "@angular/core";
-import { ExerciseModel } from "src/app/main/exercises/models/exercise.model";
-import { HttpClient, HttpResponseBase } from "@angular/common/http";
-import { delay } from "rxjs/operators";
-import { AddExerciseToTrainingModel } from "src/app/main/training/modules/training-details/models/add-exercise-to-training.model";
-
-// const apiUrl = "https://localhost:44389";
-const apiUrl = "https://trainme-webapp-cdn-dev.azurewebsites.net";
+import { Constants } from 'src/app/constants/constants';
+import { AuthService } from './../../shared/auth/auth-service.component';
+import { TrainingExerciseModel } from '../../main/training/models/training-exercise.model';
+import { TrainingModel } from '../../main/training/models/training.model';
+import { LoginData } from './../../login/models/logindata.model';
+import { Observable, defer, from } from 'rxjs';
+import { BasicUserProfileModel } from 'src/app/main/dashboard/models/userprofile.model';
+import { Injectable } from '@angular/core';
+import { ExerciseModel } from 'src/app/main/exercises/models/exercise.model';
+import {
+  HttpClient,
+  HttpResponseBase,
+  HttpHeaders,
+} from '@angular/common/http';
+import { delay } from 'rxjs/operators';
+import { AddExerciseToTrainingModel } from 'src/app/main/training/modules/training-details/models/add-exercise-to-training.model';
 
 export interface ITrainingService {
   getTrainings(): Observable<TrainingModel[]>;
@@ -21,7 +24,7 @@ export interface ITrainingService {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TrainingClient implements ITrainingService {
   constructor(private http: HttpClient) {}
@@ -40,7 +43,7 @@ export class TrainingClient implements ITrainingService {
     model: AddExerciseToTrainingModel
   ): Observable<TrainingExerciseModel> {
     return this.http.post<TrainingExerciseModel>(
-      `${apiUrl}/training/addexercise`,
+      `${Constants.config.apiUrl}/training/addexercise`,
       {
         trainingId: model.trainingId,
         exerciseId: model.exerciseId,
@@ -55,14 +58,14 @@ export interface IUserService {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserClient implements IUserService {
   userProfile(): Observable<BasicUserProfileModel> {
     const returnValue = {
-      id: "1hr45hr4bfh35hrn",
-      firstName: "Will",
-      lastName: "Smith",
+      id: '1hr45hr4bfh35hrn',
+      firstName: 'Will',
+      lastName: 'Smith',
     };
     return defer(() => Promise.resolve(returnValue));
   }
@@ -74,49 +77,59 @@ export interface IExerciseService {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ExerciseClient implements IExerciseService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   getExercises(): Observable<ExerciseModel[]> {
     const returnValue = [
       {
         id: 1,
-        name: "Russian Twist",
-        description: "-",
+        name: 'Russian Twist',
+        description: '-',
         category: 0,
         bodyPart: 3,
         difficulty: 1,
-        videoLink: "",
-        icon: "",
+        videoLink: '',
+        icon: '',
       },
       {
         id: 2,
-        name: "Dzień dobry z kettlebell",
-        description: "-",
+        name: 'Dzień dobry z kettlebell',
+        description: '-',
         category: 1,
         bodyPart: 2,
         difficulty: 2,
-        videoLink: "",
-        icon: "",
+        videoLink: '',
+        icon: '',
       },
       {
         id: 3,
-        name: "Przyciąganie do twarzy na TRX",
-        description: "-",
+        name: 'Przyciąganie do twarzy na TRX',
+        description: '-',
         category: 3,
         bodyPart: 1,
-        videoLink: "",
+        videoLink: '',
         difficulty: 4,
-        icon: "",
+        icon: '',
       },
     ];
     return defer(() => Promise.resolve(returnValue));
   }
 
   getExercisesByTerm(name: string): Observable<ExerciseModel[]> {
-    return this.http.get<ExerciseModel[]>(`${apiUrl}/exercise/search/${name}`);
+    // return from(
+    //   this.authService.getAccessToken().then((token) => {
+    //     var headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    //     return this.http
+    //       .get<ExerciseModel[]>(`${Constants.config.apiUrl}/exercise/search/${name}`, {
+    //         headers: headers,
+    //       })
+    //       .toPromise();
+    //   })
+    // );
+    return this.http.get<ExerciseModel[]>(`${Constants.config.apiUrl}/exercise/search/${name}`);
   }
 }
 
@@ -125,26 +138,26 @@ export interface IAuthService {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthClient implements IAuthService {
   login(): Observable<string> {
-    return defer(() => Promise.resolve("token"));
+    return defer(() => Promise.resolve('token'));
   }
 }
 
 const trainings = [
   {
     id: 1,
-    name: "Trening 1",
-    description: "Opis treningu 1",
+    name: 'Trening 1',
+    description: 'Opis treningu 1',
     trainingType: 1,
     difficulty: 0,
     exercises: [
       {
         repetitions: [12, 10, 8],
         exerciseId: 1,
-        exerciseTitle: "Cwiczenie 1",
+        exerciseTitle: 'Cwiczenie 1',
         category: 1,
         bodyPart: 2,
         difficulty: 1,
@@ -153,14 +166,14 @@ const trainings = [
   } as TrainingModel,
   {
     id: 2,
-    name: "Trening 2",
+    name: 'Trening 2',
     trainingType: 4,
     difficulty: 2,
     exercises: [
       {
         repetitions: [12, 10, 8],
         exerciseId: 1,
-        exerciseTitle: "Cwiczenie 1",
+        exerciseTitle: 'Cwiczenie 1',
         category: 1,
         bodyPart: 2,
         difficulty: 1,
@@ -168,7 +181,7 @@ const trainings = [
       {
         repetitions: [6, 6, 4],
         exerciseId: 1,
-        exerciseTitle: "Cwiczenie 1",
+        exerciseTitle: 'Cwiczenie 1',
         category: 1,
         bodyPart: 2,
         difficulty: 1,

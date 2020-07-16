@@ -11,7 +11,7 @@ import { FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { map, startWith } from 'rxjs/operators';
-import { bodyParts } from 'src/app/constant/exercise.constant';
+import { Constants } from 'src/app/constants/constants';
 
 @Component({
   selector: 'app-add-training-exercise-modal',
@@ -21,7 +21,7 @@ import { bodyParts } from 'src/app/constant/exercise.constant';
 export class AddTrainingExerciseModalComponent implements OnInit {
   filteredExercises$: Observable<ExerciseModel[]>;
   selectedExercise: ExerciseModel;
-  bodyParts = bodyParts;
+  bodyParts = Constants.bodyParts;
 
   addTrainingExerciseForm = this.formBuilder.group({
     exercise: ['', Validators.required],
