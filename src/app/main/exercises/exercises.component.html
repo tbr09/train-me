@@ -1,14 +1,18 @@
 <div class="spinner-container">
-  <mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
+  <mat-progress-bar
+    *ngIf="isLoading$ | async"
+    mode="indeterminate"
+  ></mat-progress-bar>
 </div>
-<div class="exercise-table-wrapper" *ngIf="!(isLoading$ | async)">
+
+<div class="exercise-table-wrapper">
   <div class="exercise-actions">
     <button mat-button color="secondary" (click)="openAddExerciseFormDialog()">
       <mat-icon>add</mat-icon> Add new exercise
     </button>
   </div>
 
-  <div class="exercise-filters">
+  <div class="exercise-filters" *ngIf="!(isLoading$ | async)">
     <mat-form-field>
       <mat-select (selectionChange)="categorySelectionChange($event)">
         <mat-option *ngFor="let cat of categoriesSelect" [value]="cat.value">
@@ -19,6 +23,7 @@
   </div>
 
   <table
+    *ngIf="!(isLoading$ | async)"
     (matSortChange)="sortData($event)"
     matSort
     mat-table

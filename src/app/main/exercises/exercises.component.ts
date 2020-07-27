@@ -1,22 +1,23 @@
-import { map } from "rxjs/operators";
-import { delay } from "rxjs/internal/operators";
-import { Observable } from "rxjs";
-import { Component, OnInit } from "@angular/core";
-import { Store } from "@ngrx/store";
+import { NotificationService } from './../../services/notification.service';
+import { map } from 'rxjs/operators';
+import { delay } from 'rxjs/internal/operators';
+import { Observable } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 
-import { MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
-import { AddExerciseModalComponent } from "./components/add-exercise-modal/add-exercise-modal.component";
-import { ExerciseActionTypes } from "./store/exercise.action";
-import { getExercises, getIsLoading } from "./store/exercise.selectors";
-import { ExerciseModel } from "./models/exercise.model";
-import { ExerciseState, ExerciseActions } from "./store";
+import { AddExerciseModalComponent } from './components/add-exercise-modal/add-exercise-modal.component';
+import { ExerciseActionTypes } from './store/exercise.action';
+import { getExercises, getIsLoading } from './store/exercise.selectors';
+import { ExerciseModel } from './models/exercise.model';
+import { ExerciseState, ExerciseActions } from './store';
 import { Constants } from 'src/app/constants/constants';
 
 @Component({
-  selector: "app-exercises",
-  templateUrl: "./exercises.component.html",
-  styleUrls: ["./exercises.component.scss"],
+  selector: 'app-exercises',
+  templateUrl: './exercises.component.html',
+  styleUrls: ['./exercises.component.scss'],
 })
 export class ExercisesComponent implements OnInit {
   exercises$: Observable<ExerciseModel[]>;
@@ -26,33 +27,43 @@ export class ExercisesComponent implements OnInit {
   addExerciseDialogRef: MatDialogRef<AddExerciseModalComponent>;
 
   categories = Constants.categories;
-  categoriesSelect = Constants.categories.map((cat, i) => ({ value: i, viewValue: cat }));
+  categoriesSelect = Constants.categories.map((cat, i) => ({
+    value: i,
+    viewValue: cat,
+  }));
   bodyParts = Constants.bodyParts;
 
   displayedColumns: string[] = [
-    "id",
-    "name",
-    "description",
-    "category",
-    "bodyPart",
+    'id',
+    'name',
+    'description',
+    'category',
+    'bodyPart',
   ];
 
   constructor(
     private exerciseStore: Store<ExerciseState>,
-    private dialog: MatDialog
-  ) {
+    private dialog: MatDialog,
+    private notificationService: NotificationService
+  ) {}
+
+  ngOnInit(): void {
     this.exercises$ = this.exerciseStore.select(getExercises).pipe(delay(2000));
     this.isLoading$ = this.exerciseStore.select(getIsLoading);
 
-    this.exercises$.subscribe((results) => (this.filteredExercises = results));
-  }
-
-  ngOnInit(): void {
+    this.exercises$.subscribe(
+      (results) => (this.filteredExercises = results),
+      (error) => {
+        this.notificationService.sendNotification(
+          `Error ocurred during loading exercises! ${error.status}`
+        );
+      }
+    );
     this.exerciseStore.dispatch({ type: ExerciseActionTypes.LoadExercises });
   }
 
   sortData(event): void {
-    if (event.direction === "asc") {
+    if (event.direction === 'asc') {
       this.filteredExercises = [...this.filteredExercises].sort((i1, i2) =>
         i1[event.active] > i2[event.active] ? 1 : -1
       );
@@ -71,8 +82,8 @@ export class ExercisesComponent implements OnInit {
 
   openAddExerciseFormDialog(): void {
     this.addExerciseDialogRef = this.dialog.open(AddExerciseModalComponent, {
-      width: "250px",
-      data: { name: "example name passed to modal form" },
+      width: '250px',
+      data: { name: 'example name passed to modal form' },
       disableClose: true,
       autoFocus: true,
     });
@@ -91,6 +102,6 @@ export class ExercisesComponent implements OnInit {
   }
 
   closeAddExerciseFormDialog() {
-    this.addExerciseDialogRef.close("Pizza!");
+    this.addExerciseDialogRef.close();
   }
 }

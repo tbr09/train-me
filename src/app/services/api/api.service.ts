@@ -115,7 +115,7 @@ export class ExerciseClient implements IExerciseService {
         icon: '',
       },
     ];
-    return defer(() => Promise.resolve(returnValue));
+    return defer(() => Promise.resolve(returnValue)).pipe(delay(2000));
   }
 
   getExercisesByTerm(name: string): Observable<ExerciseModel[]> {
@@ -129,7 +129,9 @@ export class ExerciseClient implements IExerciseService {
     //       .toPromise();
     //   })
     // );
-    return this.http.get<ExerciseModel[]>(`${Constants.config.apiUrl}/exercise/search/${name}`);
+    return this.http.get<ExerciseModel[]>(
+      `${Constants.config.apiUrl}/exercise/search/${name}`
+    );
   }
 }
 

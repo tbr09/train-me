@@ -1,3 +1,4 @@
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatInputModule } from "@angular/material/input";
 import { MatButtonModule } from "@angular/material/button";
 import { EffectsModule } from "@ngrx/effects";
@@ -13,7 +14,6 @@ import { createExerciseReducer } from "./store";
 import { AddExerciseModalComponent } from "./components/add-exercise-modal/add-exercise-modal.component";
 
 import { MatTableModule } from "@angular/material/table";
-import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatIconModule } from "@angular/material/icon";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -45,7 +45,7 @@ import { MatSortModule } from "@angular/material/sort";
     MatFormFieldModule,
     MatDialogModule,
     MatSelectModule,
-    MatProgressSpinnerModule,
+    MatProgressBarModule,
   ],
   entryComponents: [AddExerciseModalComponent],
 })
