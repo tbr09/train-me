@@ -18,7 +18,7 @@
         (optionSelected)="updateSelectedExercise($event)"
       >
         <mat-option
-          *ngFor="let exercise of filteredExercises$ | async"
+          *ngFor="let exercise of (filteredExercises$ | async)"
           [value]="exercise"
         >
           <span>{{ exercise.name }}</span>
@@ -68,7 +68,7 @@
       />
       <mat-autocomplete #auto="matAutocomplete" [displayWith]="getExerciseName">
         <mat-option
-          *ngFor="let alternativeExercise of filteredExercises$ | async"
+          *ngFor="let alternativeExercise of (filteredExercises$ | async)"
           [value]="alternativeExercise"
         >
           <span>{{ alternativeExercise.name }}</span>
